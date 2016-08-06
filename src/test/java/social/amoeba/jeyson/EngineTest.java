@@ -11,17 +11,32 @@ import static org.junit.Assert.*;
 
 public class EngineTest {
 
+  private String path;
+  private Arguments args;
+  private Path filePath;
+  private Engine engine;
+
+  @Before
+  public void setUp() throws Exception {
+    path = "/sample-script.js";
+    filePath = Paths.get(this.getClass().getResource(path).toURI());
+    engine = new Engine(filePath);
+  }
+
   @Test
-  public void shouldExecuteAGlobalMethod() throws Exception {
-    String path     = "/sample-script.js";
-    String function = "callMe";
-    String args     = "some-arg";
-    Path filePath   = Paths.get(this.getClass().getResource(path).toURI());
+  public void shouldPassArgumentToScript() throws Exception {
+    Object execute = engine.execute("returnArgument", new Arguments("some-arg"));
+    assertThat(execute.toString(), is("some-arg"));
+  }
 
-    Engine engine = new Engine(filePath);
+  public static class Arguments {
+    private final String message ;
+    public String getMessage() {
+      return message;
+    }
+    public Arguments(String message) {
+      this.message = message;
+    }
 
-    Object execute = engine.execute(function, args);
-
-    assertThat(execute.toString(), is("you called me.."));
   }
 }

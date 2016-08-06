@@ -1,3 +1,3 @@
-function callMe(){
-    return "you called me..";
+function returnArgument(arg){
+    return arg.getMessage();
 }
