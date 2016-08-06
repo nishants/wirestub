@@ -1,14 +1,15 @@
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import social.amoeba.Jeyson;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 public class Main {
   private static final WireMockConfiguration config =
       options()
-//          .extensions("com.mycorp.ExtensionOne")
+          .extensions(new Jeyson())
           .usingFilesUnderDirectory("/Users/dawn/Documents/projects/jeyson/src/main/resources")
-          .port(8814);
+          .port(8819);
 
   public static void main(String...hh) throws InterruptedException {
     final WireMockServer wireMockServer = new WireMockServer(config); //No-args constructor will start on config 8080, no HTTPS

@@ -23,6 +23,6 @@ public class Jeyson extends ResponseDefinitionTransformer {
 
 
   public String getName() {
-    return null;
+    return "Jeyson Parser";
   }
 }
