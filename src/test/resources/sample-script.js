@@ -5,3 +5,8 @@ function returnArgument(arg){
 function evalSnippet(arg){
     return eval(arg.getMessage());
 }
+
+callsMade = 0;
+function callsCount(){
+    return {count: ++callsMade};
+}

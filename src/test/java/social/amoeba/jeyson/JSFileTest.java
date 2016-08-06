@@ -1,5 +1,6 @@
 package social.amoeba.jeyson;
 
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,6 +34,15 @@ public class JSFileTest {
   public void shouldSupportEval() throws Exception {
     Object execute = JSFile.execute("evalSnippet", new Arguments("[1,2,3,4,5].join(',')"));
     assertThat(execute.toString(), is("1,2,3,4,5"));
+  }
+
+  @Test
+  public void testInMemoryValues() throws Exception {
+    Object result = ((ScriptObjectMirror)JSFile.execute("callsCount", null)).get("count");
+    assertThat((Double)result, is(1.0));
+
+    result = ((ScriptObjectMirror)JSFile.execute("callsCount", null)).get("count");
+    assertThat((Double)result, is(2.0));
   }
 
   public static class Arguments {
