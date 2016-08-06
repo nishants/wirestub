@@ -28,7 +28,7 @@ public class TemplateEngineTest {
 
   @Test
   public void testGetTemplateCallBack() throws Exception {
-    String compiledResult = templateEngine.compile("a json string");
-    assertThat(templateEngine.compile("{'id': 1}"), is(helloFileContent));
+    String result = templateEngine.compile("{'id': 1}");
+    assertThat(result, is(helloFileContent));
   }
 }
