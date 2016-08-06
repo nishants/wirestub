@@ -8,6 +8,14 @@
     <artifactId>jeyson</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <developers>
+        <developer>
+            <name>Nishant</name>
+            <organization>amoeba social</organization>
+            <organizationUrl>amoeba.social</organizationUrl>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
