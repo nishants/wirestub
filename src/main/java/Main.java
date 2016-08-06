@@ -7,6 +7,7 @@ public class Main {
   private static final WireMockConfiguration config =
       options()
 //          .extensions("com.mycorp.ExtensionOne")
+          .usingFilesUnderDirectory("/Users/dawn/Documents/projects/jeyson/src/main/resources")
           .port(8811);
 
   public static void main(String...hh){
@@ -21,7 +22,5 @@ public class Main {
           }
         });
 
-
-    wireMockServer.stop();
   }
 }
