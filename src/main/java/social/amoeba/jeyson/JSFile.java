@@ -10,10 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-public class Engine {
+public class JSFile {
   private final Invocable scriptEnginge;
 
-  public Engine(Path path) throws IOException, ScriptException {
+  public JSFile(Path path) throws IOException, ScriptException {
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
     engine.eval(Files.newBufferedReader(path, StandardCharsets.UTF_8));
     this.scriptEnginge = (Invocable) engine;

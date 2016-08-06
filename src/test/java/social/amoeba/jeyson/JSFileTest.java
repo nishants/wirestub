@@ -9,29 +9,29 @@ import java.nio.file.Paths;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class EngineTest {
+public class JSFileTest {
 
   private String path;
   private Arguments args;
   private Path filePath;
-  private Engine engine;
+  private JSFile JSFile;
 
   @Before
   public void setUp() throws Exception {
     path = "/sample-script.js";
     filePath = Paths.get(this.getClass().getResource(path).toURI());
-    engine = new Engine(filePath);
+    JSFile = new JSFile(filePath);
   }
 
   @Test
   public void shouldPassArgumentToScript() throws Exception {
-    Object execute = engine.execute("returnArgument", new Arguments("some-arg"));
+    Object execute = JSFile.execute("returnArgument", new Arguments("some-arg"));
     assertThat(execute.toString(), is("some-arg"));
   }
 
   @Test
   public void shouldSupportEval() throws Exception {
-    Object execute = engine.execute("evalSnippet", new Arguments("[1,2,3,4,5].join(',')"));
+    Object execute = JSFile.execute("evalSnippet", new Arguments("[1,2,3,4,5].join(',')"));
     assertThat(execute.toString(), is("1,2,3,4,5"));
   }
 
