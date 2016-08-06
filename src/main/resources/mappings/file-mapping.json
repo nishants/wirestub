@@ -5,6 +5,9 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "file-response.json"
+    "bodyFileName": "file-response.json",
+    "transformerParameters" : {
+      "controller" : "createUserController"
+    }
   }
 }

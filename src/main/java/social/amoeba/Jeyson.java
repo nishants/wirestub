@@ -14,11 +14,11 @@ public class Jeyson extends ResponseDefinitionTransformer {
                                       ResponseDefinition responseDefinition,
                                       FileSource files,
                                       Parameters parameters) {
-    boolean isJsonFileResonse = responseDefinition.getBodyFileName().endsWith(".json");
+    boolean isJsonFileResponse = responseDefinition.getBodyFileName().endsWith(".json");
+    String controllerName      = responseDefinition.getTransformerParameters().get("controller").toString();
 
-    return new ResponseDefinitionBuilder().like(responseDefinition)
-//        .withHeader("MyHeader", "Transformed")
-//        .withStatus(200)
+    return new ResponseDefinitionBuilder()
+        .like(responseDefinition)
         .withBody(parse(readFile(files.getPath(), responseDefinition.getBodyFileName())))
         .build();
   }
