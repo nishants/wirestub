@@ -23,8 +23,8 @@ public class Main {
           }
         });
 
-    Thread.sleep(30000);
-    wireMockServer.stop();
+    Thread.sleep(99999000);
+    wireMockServer.shutdownServer();
 
   }
 }
