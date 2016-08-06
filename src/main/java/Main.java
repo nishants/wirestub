@@ -8,9 +8,9 @@ public class Main {
       options()
 //          .extensions("com.mycorp.ExtensionOne")
           .usingFilesUnderDirectory("/Users/dawn/Documents/projects/jeyson/src/main/resources")
-          .port(8811);
+          .port(8814);
 
-  public static void main(String...hh){
+  public static void main(String...hh) throws InterruptedException {
     final WireMockServer wireMockServer = new WireMockServer(config); //No-args constructor will start on config 8080, no HTTPS
     wireMockServer.start();
 
@@ -21,6 +21,9 @@ public class Main {
             wireMockServer.stop();
           }
         });
+
+    Thread.sleep(30000);
+    wireMockServer.stop();
 
   }
 }
