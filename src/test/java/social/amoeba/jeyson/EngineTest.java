@@ -29,6 +29,12 @@ public class EngineTest {
     assertThat(execute.toString(), is("some-arg"));
   }
 
+  @Test
+  public void shouldSupportEval() throws Exception {
+    Object execute = engine.execute("evalSnippet", new Arguments("[1,2,3,4,5].join(',')"));
+    assertThat(execute.toString(), is("1,2,3,4,5"));
+  }
+
   public static class Arguments {
     private final String message ;
     public String getMessage() {
