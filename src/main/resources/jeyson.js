@@ -168,7 +168,7 @@ function jeyson(config){
                 var error = function(params){
                         var message =  "<error> :  <expression> for <scope>"
                             .replace("<expression>", params.expression)
-                            .replace("<scope>", JSON.stringify(params.scope))
+                            .replace("<scope>", config.stringify(params.scope))
                             .replace("<error>", params.error);
                         return {
                             message: message
@@ -253,7 +253,7 @@ function jeyson(config){
                         return self.compile(scope, template, config);
                     },
                     getTemplate = function(path){
-                        return templates.create(JSON.parse(config.getTemplate(path)));
+                        return templates.create(config.parseJson(config.getTemplate(path)));
                     };
 
                 config = config ? config : {};
@@ -277,7 +277,7 @@ function jeyson(config){
 
     return {
         compile: function(scope, template){
-            return config.stringify(config.parseJson(config.getTemplate("hello/hello.json")));
+            return config.stringify(compiler.compile(scope, config.parseJson(template), config));
         }
     };
 }

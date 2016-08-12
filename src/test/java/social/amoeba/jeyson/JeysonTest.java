@@ -28,8 +28,8 @@ public class JeysonTest {
   }
 
   @Test
-  public void testGetTemplateCallBack() throws Exception {
-    String result = jeyson.compile(Collections.emptyMap(), "{\"id\": 1}");
+  public void testCompilePlainJson() throws Exception {
+    String result = jeyson.compile(Collections.emptyMap(), helloFileContent);
     assertThat(result, is(helloFileContent));
   }
 }
