@@ -5,6 +5,7 @@ import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import javax.script.ScriptException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Map;
 
 public class TemplateEngine {
   private final ScriptObjectMirror engine;
@@ -15,7 +16,7 @@ public class TemplateEngine {
     engine = (ScriptObjectMirror) jsObject;
   }
 
-  public String compile(String template) throws ScriptException, NoSuchMethodException {
+  public String compile(Map scope, String template) throws ScriptException, NoSuchMethodException {
     return ((ScriptObjectMirror)engine.get("compile")).call(engine, template).toString();
   }
 }

@@ -28,7 +28,7 @@ public class TemplateEngineTest {
 
   @Test
   public void testGetTemplateCallBack() throws Exception {
-    String result = templateEngine.compile("{'id': 1}");
+    String result = templateEngine.compile(null, "{'id': 1}");
     assertThat(result, is(helloFileContent));
   }
 }
