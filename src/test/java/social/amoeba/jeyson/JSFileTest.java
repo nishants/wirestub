@@ -20,8 +20,7 @@ public class JSFileTest {
   @Before
   public void setUp() throws Exception {
     path = "/sample-script.js";
-    filePath = Paths.get(this.getClass().getResource(path).toURI());
-    JSFile = new JSFile(filePath);
+    JSFile = new JSFile(path);
   }
 
   @Test

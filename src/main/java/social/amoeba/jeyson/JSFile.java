@@ -5,17 +5,18 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class JSFile {
   private final Invocable scriptEnginge;
 
-  public JSFile(Path path) throws IOException, ScriptException {
+  public JSFile(String path) throws IOException, ScriptException, URISyntaxException {
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-    engine.eval(Files.newBufferedReader(path, StandardCharsets.UTF_8));
+    engine.eval(Files.newBufferedReader(Paths.get(this.getClass().getResource(path).toURI()), StandardCharsets.UTF_8));
     this.scriptEnginge = (Invocable) engine;
   }
 

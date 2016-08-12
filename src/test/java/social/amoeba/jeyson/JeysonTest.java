@@ -19,10 +19,7 @@ public class JeysonTest {
 
   @Before
   public void setUp() throws Exception {
-    jeyson = new Jeyson(
-        Paths.get(this.getClass().getResource(jeysonJs).toURI()),
-        Paths.get(this.getClass().getResource(__files).toURI())
-    );
+    jeyson = new Jeyson(Paths.get(this.getClass().getResource(__files).toURI()));
     helloFileContent = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(__helloFile).toURI())));
   }
 
