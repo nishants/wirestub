@@ -1,9 +1,13 @@
 package social.amoeba.jeyson;
 
+import wiremock.com.fasterxml.jackson.core.JsonParseException;
+import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 public class CompileParam {
   private final Path __files;
@@ -19,4 +23,13 @@ public class CompileParam {
   public String getTemplate(String path) throws IOException {
     return new String(Files.readAllBytes(Paths.get(__files.toString(), path)));
   }
+
+  public Map parseJson(String json) throws IOException {
+    return new ObjectMapper().readValue(json, Map.class);
+  }
+
+  public String stringify(Map json) throws IOException {
+    return new ObjectMapper().writeValueAsString(json);
+  }
+
 }

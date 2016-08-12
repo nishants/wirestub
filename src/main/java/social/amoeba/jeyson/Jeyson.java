@@ -1,6 +1,8 @@
 package social.amoeba.jeyson;
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import wiremock.com.fasterxml.jackson.core.JsonParseException;
+import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.script.ScriptException;
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class Jeyson {
     engine = (ScriptObjectMirror) jsObject;
   }
 
-  public String compile(Map scope, String template) throws ScriptException, NoSuchMethodException {
+  public String compile(Map scope, String template) throws ScriptException, NoSuchMethodException, IOException {
     return ((ScriptObjectMirror)engine.get("compile")).call(engine, scope, template).toString();
   }
 }

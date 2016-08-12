@@ -1,10 +1,14 @@
 package social.amoeba.jeyson;
 
+import com.fasterxml.jackson.core.JsonFactory;
 import org.junit.Before;
 import org.junit.Test;
+import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -25,7 +29,7 @@ public class JeysonTest {
 
   @Test
   public void testGetTemplateCallBack() throws Exception {
-    String result = jeyson.compile(null, "{'id': 1}");
+    String result = jeyson.compile(Collections.emptyMap(), "{\"id\": 1}");
     assertThat(result, is(helloFileContent));
   }
 }
