@@ -1,13 +1,13 @@
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import social.amoeba.Jeyson;
+import social.amoeba.JeysonWiremock;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 public class Main {
   private static final WireMockConfiguration config =
       options()
-          .extensions(new Jeyson())
+          .extensions(new JeysonWiremock())
           .usingFilesUnderDirectory("/Users/dawn/Documents/projects/jeyson/src/main/resources")
           .port(8819);
 

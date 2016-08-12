@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class TemplateEngine {
+public class Jeyson {
   private final ScriptObjectMirror engine;
 
-  public TemplateEngine(Path jsEngine, Path __files) throws IOException, ScriptException, NoSuchMethodException {
+  public Jeyson(Path jsEngine, Path __files) throws IOException, ScriptException, NoSuchMethodException {
     JSFile script = new JSFile(jsEngine);
     Object jsObject = script.execute("jeyson", new CompileParam(__files));
     engine = (ScriptObjectMirror) jsObject;

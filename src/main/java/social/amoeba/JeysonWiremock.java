@@ -7,7 +7,7 @@ import com.github.tomakehurst.wiremock.extension.ResponseDefinitionTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 
-public class Jeyson extends ResponseDefinitionTransformer {
+public class JeysonWiremock extends ResponseDefinitionTransformer {
 
   @Override
   public ResponseDefinition transform(Request request,

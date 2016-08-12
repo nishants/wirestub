@@ -11,7 +11,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class JeysonTest {
+public class JeysonWiremockTest {
   private static final int port = 8811;
   private final WireMockConfiguration config =
       options()

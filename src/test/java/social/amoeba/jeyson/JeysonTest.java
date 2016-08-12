@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class TemplateEngineTest {
+public class JeysonTest {
 
-  private TemplateEngine templateEngine;
+  private Jeyson jeyson;
   private String jeysonJs     = "/jeyson-contract.js";
   private String __files      = "/__files";
   private String __helloFile  = "/__files/hello/hello.json";
@@ -19,7 +19,7 @@ public class TemplateEngineTest {
 
   @Before
   public void setUp() throws Exception {
-    templateEngine = new TemplateEngine(
+    jeyson = new Jeyson(
         Paths.get(this.getClass().getResource(jeysonJs).toURI()),
         Paths.get(this.getClass().getResource(__files).toURI())
     );
@@ -28,7 +28,7 @@ public class TemplateEngineTest {
 
   @Test
   public void testGetTemplateCallBack() throws Exception {
-    String result = templateEngine.compile(null, "{'id': 1}");
+    String result = jeyson.compile(null, "{'id': 1}");
     assertThat(result, is(helloFileContent));
   }
 }
