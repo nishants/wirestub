@@ -1,8 +1,7 @@
 package social.amoeba.jeyson;
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
-import wiremock.com.fasterxml.jackson.core.JsonParseException;
-import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import javax.script.ScriptException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-function jeyson(config){
+function jeyson(jeysonConfig){
     var
         createDirectives = function(){
             var repeater = {
@@ -53,7 +53,7 @@ function jeyson(config){
                         });
                     }
                     param = template[directive.name];
-                    template.deleteDirective(directive.name)
+                    jeysonConfig.deleteField(directive.name, template);
 
                     var replace = directive.directive.link(scope, template, param, compile, getTemplate);
                     template = replace || compile(scope, template); // replace if directive returns valid value, else compile the template after directoryis done
@@ -168,7 +168,7 @@ function jeyson(config){
                 var error = function(params){
                         var message =  "<error> :  <expression> for <scope>"
                             .replace("<expression>", params.expression)
-                            .replace("<scope>", config.stringify(params.scope))
+                            .replace("<scope>", jeysonConfig.stringify(params.scope))
                             .replace("<error>", params.error);
                         return {
                             message: message
@@ -216,7 +216,7 @@ function jeyson(config){
             create: function(template){
                 template.__ = true; //TODO for trnsitioning to template model
                 template.deleteDirective = function(name){
-                    delete this[name];
+                    jeysonConfig.log(name, this);
                 };
                 template.isDirective = function(){
                     for(var field in this){
@@ -277,7 +277,7 @@ function jeyson(config){
 
     return {
         compile: function(scope, template){
-            return config.stringify(compiler.compile(scope, config.parseJson(template), config));
+            return jeysonConfig.stringify(compiler.$compile(scope, jeysonConfig.parseJson(template), jeysonConfig));
         }
     };
 }
