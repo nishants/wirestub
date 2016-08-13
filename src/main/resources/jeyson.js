@@ -213,12 +213,13 @@ function jeyson(jeysonConfig){
                     execute = function (scope, expression) {
                         var contextScript = "";
                         for (var field in scope) {
-                            contextScript += ("var <field> = this.<field>;".replace("<field>", field).replace("<field>", field));
+                            contextScript += ("var <field> = scope.<field>;".replace("<field>", field).replace("<field>", field));
                         }
                         scope.execute = function () {
                             var escapeExpression = expression.replace(new RegExp("\'", 'g'), "\\'");
                             try {
-                                return eval(contextScript + "eval('<expression>');".replace("<expression>", escapeExpression));
+                              var sript = contextScript + "eval('<expression>');".replace("<expression>", escapeExpression);
+                                return eval(sript);
                             }catch(err){
                                 return error({scope: this, expression: expression, error: err}).message;
                             }

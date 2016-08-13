@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -42,6 +42,19 @@ public class JSFileTest {
 
     result = ((ScriptObjectMirror)JSFile.execute("callsCount", null)).get("count");
     assertThat((Double)result, is(2.0));
+  }
+
+  @Test
+  public void testScopeExecute() throws Exception {
+    HashMap scope = new HashMap();
+    scope.put("field", "my-value");
+
+    HashMap params = new HashMap();
+    params.put("scope", scope);
+    params.put("expression", "field +\"-cat\"");
+
+    Object execute = JSFile.execute("executeScope", params);
+    assertThat(execute.toString(), is("my-value-cat"));
   }
 
   public static class Arguments {

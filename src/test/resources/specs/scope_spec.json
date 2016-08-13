@@ -1,0 +1,6 @@
+{
+  "template" : {"name" : "{{message}}"},
+  "scope"    : {"message": "message-from-scope !"},
+  "config"   : {},
+  "expected" : {"name" : "message-from-scope !"}
+}
