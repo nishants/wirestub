@@ -15,41 +15,25 @@ import static org.junit.Assert.assertThat;
 public class JeysonTest {
 
   private Jeyson jeyson;
-  private String templatesPath  = "/__files";
-  private String __helloFile    = "/__files/hello/hello.json";
-  private String __includeFile  = "/__files/include.json";
-  private String helloFileContent;
-  private String includeFileContent;
+  private String templatesPath  = "/templates";
   private TestSupport support = new TestSupport();
+  private String[]     specs  = new String[]{
+      "/specs/include_template_spec.json  :should include json with relative paths",
+      "/specs/expression_spec.json        :should support expressions for primitive types",
+      "/specs/scope_spec.json             :should support accessing scope values by reference in expressoins",
+      "/specs/plain_old.json              :every json must be a valid jeyson template",
+  };
 
   @Before
   public void setUp() throws Exception {
     jeyson = new Jeyson(Paths.get(this.getClass().getResource(templatesPath).toURI()));
-    helloFileContent = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(__helloFile).toURI())));
-    includeFileContent = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(__includeFile).toURI())));
   }
 
   @Test
-  public void testCompilePlainJson() throws Exception {
-    String result = jeyson.compile(Collections.emptyMap(), helloFileContent);
-    assertThat(result, is(helloFileContent));
-  }
-
-  @Test
-  public void testCompileinclude() throws Exception {
-    Spec sample = support.getSample("/specs/include_template_spec.json");
-    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
-  }
-
-  @Test
-  public void testExpressoin() throws Exception {
-    Spec sample = support.getSample("/specs/expression_spec.json");
-    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
-  }
-
-  @Test
-  public void testScope() throws Exception {
-    Spec sample = support.getSample("/specs/scope_spec.json");
-    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
+  public void testSpecs() throws Exception {
+    for (String spec : specs) {
+      Spec params = support.getSample(spec.split(":")[0].trim());
+      assertThat(spec.split(":")[1], jeyson.compile(params.scope, params.template), is(params.expected));
+    }
   }
 }

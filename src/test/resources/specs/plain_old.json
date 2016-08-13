@@ -1,0 +1,6 @@
+{
+  "template" : {"message" : "plain old json"},
+  "scope"    : {},
+  "config"   : {},
+  "expected" : {"message" : "plain old json"}
+}
