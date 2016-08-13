@@ -30,3 +30,10 @@
 - script's compile function evaluates result and transforms using fixture to nashorn-java compatible objects
 
 - the result is a Map object that represents a json tree.
+ 
+
+Debugging Inside JS Script
+- inside js script invoke jeysonConfig.log(param1,...paramN)
+- use java IDE debugger inside the CompileParam.log method.
+
+
