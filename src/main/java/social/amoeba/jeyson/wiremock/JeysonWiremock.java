@@ -6,12 +6,17 @@ import com.github.tomakehurst.wiremock.extension.Parameters;
 import com.github.tomakehurst.wiremock.extension.ResponseDefinitionTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.ResponseDefinition;
+import social.amoeba.jeyson.Jeyson;
+import social.amoeba.jeyson.Json;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.script.ScriptException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Map;
 
 public class JeysonWiremock extends ResponseDefinitionTransformer {
@@ -29,20 +34,28 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
     if(isJsonFileResponse){
       try {
-        response = response.withBody(parse(readFile(templatesPath, bodyFileName)));
+        response = response.withBody(parse(templatesPath, readFile(templatesPath, bodyFileName)));
       } catch (IOException e) {
+        e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (ScriptException e) {
+        e.printStackTrace();
+      } catch (URISyntaxException e) {
         e.printStackTrace();
       }
     }
     return response.build();
   }
 
-  private String parse(String template) {
-    return template;
+  private String parse(String templatesPath, String template) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
+    template = Json.stringify(Json.parse(template, Map.class));
+    Map compiled = new Jeyson(templatesPath).compile(new HashMap(), template);
+    return new ObjectMapper().writeValueAsString(compiled);
   }
 
   private String readFile(String path, String filename) throws IOException {
-    return new ObjectMapper().readValue(new File(path, filename), Map.class).get("body").toString();
+    return Json.stringify(new ObjectMapper().readValue(new File(path, filename), Map.class).get("body"));
   }
 
 
