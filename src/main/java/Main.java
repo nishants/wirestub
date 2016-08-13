@@ -7,9 +7,6 @@ import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 import javax.script.ScriptException;
 import java.io.*;
 import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
