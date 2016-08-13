@@ -27,7 +27,7 @@ public class JeysonTest {
 
   @Before
   public void setUp() throws Exception {
-    jeyson = new Jeyson(Paths.get(this.getClass().getResource(templatesPath).toURI()));
+    jeyson = new Jeyson(support.absolute("/jeyson.js"),Paths.get(this.getClass().getResource(templatesPath).toURI()).toAbsolutePath());
   }
 
   @Test

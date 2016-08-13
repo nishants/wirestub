@@ -16,7 +16,7 @@ public class JSFile {
 
   public JSFile(String path) throws IOException, ScriptException, URISyntaxException {
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-    engine.eval(Files.newBufferedReader(Paths.get(this.getClass().getResource(path).toURI()), StandardCharsets.UTF_8));
+    engine.eval(Files.newBufferedReader(Paths.get(path), StandardCharsets.UTF_8));
     this.scriptEnginge = (Invocable) engine;
   }
 

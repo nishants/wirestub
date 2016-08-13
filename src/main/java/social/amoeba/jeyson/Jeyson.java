@@ -11,10 +11,9 @@ import java.util.Map;
 
 public class Jeyson {
   private final ScriptObjectMirror engine;
-  private final String jsEngine = "/jeyson.js";
 
-  public Jeyson(Path tempatesPath) throws IOException, ScriptException, NoSuchMethodException, URISyntaxException {
-    JSFile script = new JSFile(jsEngine);
+  public Jeyson(String jeysonJsPath, Path tempatesPath) throws IOException, ScriptException, NoSuchMethodException, URISyntaxException {
+    JSFile script = new JSFile(jeysonJsPath);
     Object jsObject = script.execute("jeyson", new CompileParam(tempatesPath));
     engine = (ScriptObjectMirror) jsObject;
   }

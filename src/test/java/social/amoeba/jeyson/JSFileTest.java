@@ -3,6 +3,7 @@ package social.amoeba.jeyson;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.junit.Before;
 import org.junit.Test;
+import social.amoeba.TestSupport;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -16,10 +17,11 @@ public class JSFileTest {
   private Arguments args;
   private Path filePath;
   private JSFile JSFile;
+  private TestSupport support = new TestSupport();
 
   @Before
   public void setUp() throws Exception {
-    path = "/sample-script.js";
+    path = support.absolute("/sample-script.js");
     JSFile = new JSFile(path);
   }
 

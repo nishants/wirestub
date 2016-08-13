@@ -11,9 +11,13 @@ import java.util.Map;
 
 public class TestSupport {
   public Spec getSample(String path) throws URISyntaxException, IOException {
-    String s = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(path).toURI())));
+    String s = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(path).toURI()).toAbsolutePath()));
     return new ObjectMapper().readValue(s, Spec.class);
   }
+  public String absolute(String path) throws URISyntaxException, IOException {
+    return Paths.get(this.getClass().getResource(path).toURI()).toAbsolutePath().toString();
+  }
+
   public static class Spec{
     public void setTemplate(Map template) throws JsonProcessingException {
       this.template = new ObjectMapper().writeValueAsString(template);
