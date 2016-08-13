@@ -1,6 +1,5 @@
 {
   "scope"    : {},
-  "config"   : {},
   "template" : {
     "message"   : "hello",
     "float"     : "{{1 + 0.1 }}",

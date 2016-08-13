@@ -1,6 +1,5 @@
 {
+  "scope"    : {},
   "template" : {"body"   : {"@include": "shared/shared.json"}},
-  "scope"    : {"message": "message-from-scope !"},
-  "config"   : {},
-  "expected" : {"body" : {"shared" : "a shared json template"}}
+  "expected" : {"body"   : {"shared"  : "a shared json template"}}
 }
