@@ -8,7 +8,7 @@ function jeyson(jeysonConfig){
             return isInt ? new java.lang.Integer(number) : number;
         },
         arraysFixture = function(array){
-            var list = new java.util.ArrayList;
+            var list = new java.util.ArrayList();
             for(var i = 0 ; i < array.length; i++){
                 list.add(array[i]);
             }

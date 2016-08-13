@@ -1,5 +1,5 @@
 {
-  "scope"    : {"shared_tempate" : "shared/shared.json"},
+  "scope"    : {"shared_tempate_path" : "shared/shared.json", "request" : {"userNames": ["one", "two", "three"]}},
   "template" : {
     "message"   : "hello",
     "float"     : "{{1 + 0.1 }}",
@@ -7,8 +7,11 @@
     "nil"       : "{{null}}",
     "boolean"   : "{{1 == 2}}",
     "list"      : "{{ 'one,two,three,four,five'.split(',') }}",
-    "included"  : {"@include": "{{shared_tempate}}"} ,
-    "repeater"  : {"@repeat" : "count in [1,2,3,4,5]", "id": "{{$index + count}}"}
+    "repeater"  : {
+                    "@repeat" : "name in request.userNames",
+                    "id": "{{(1 +$index) + '-' + name}}"
+    },
+    "included-file"  : {"@include": "{{shared_tempate_path}}"}
   }
 ,
   "expected"   : {
@@ -18,7 +21,11 @@
     "nil"     : null,
     "boolean" : false,
     "list"    : ["one", "two", "three", "four", "five"],
-    "included": {"shared"  : "a shared json template"},
-    "repeater": [{"id": 1}, {"id": 3}, {"id": 5}, {"id": 7}, {"id": 9}]
+    "repeater": [
+                  {"id": "1-one"},
+                  {"id": "2-two"},
+                  {"id": "3-three"}
+    ],
+    "included-file": {"shared"  : "a shared json template"}
   }
 }

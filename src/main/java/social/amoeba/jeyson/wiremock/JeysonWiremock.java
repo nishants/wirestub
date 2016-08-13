@@ -16,10 +16,11 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
                                       Parameters parameters) {
     boolean isJsonFileResponse = responseDefinition.getBodyFileName().endsWith(".json");
     String controllerName      = responseDefinition.getTransformerParameters().get("controller").toString();
+    String templatesPath       = files.getPath();
 
     return new ResponseDefinitionBuilder()
         .like(responseDefinition)
-        .withBody(parse(readFile(files.getPath(), responseDefinition.getBodyFileName())))
+        .withBody(parse(readFile(templatesPath, responseDefinition.getBodyFileName())))
         .build();
   }
 
@@ -33,6 +34,6 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
 
   public String getName() {
-    return "Jeyson Parser";
+    return "Jeyson";
   }
 }
