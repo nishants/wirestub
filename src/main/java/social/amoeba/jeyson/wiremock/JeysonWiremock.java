@@ -1,4 +1,4 @@
-package social.amoeba;
+package social.amoeba.jeyson.wiremock;
 
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.common.FileSource;

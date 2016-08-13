@@ -1,6 +1,6 @@
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import social.amoeba.JeysonWiremock;
+import social.amoeba.jeyson.wiremock.JeysonWiremock;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
