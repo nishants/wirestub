@@ -1,5 +1,9 @@
 function jeyson(jeysonConfig){
     var
+        numberFixture = function(number){
+            var isInt = number % 1 === 0;
+            return isInt ? new java.lang.Integer(number) : number;
+        },
         arraysFixture = function(array){
             var list = new java.util.ArrayList;
             for(var i = 0 ; i < array.length; i++){
@@ -11,12 +15,19 @@ function jeyson(jeysonConfig){
             for(var field in json){
                 var value       = json[field],
                     isArray     = value instanceof Array,
+                    isNumber    = (typeof value == "number"),
                     isSubtree   = (typeof value == "object") && !(value instanceof Array);
                 if(isSubtree){
                     json[field] = objectFixture(json[field]);
                 }
                 if(isArray){
+                    json[field] = json[field].map(function(field){
+                        return objectFixture(field);
+                    });
                     json[field] = arraysFixture(json[field]);
+                }
+                if(isNumber){
+                    json[field] = numberFixture(json[field]);
                 }
             }
             return json;

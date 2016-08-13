@@ -44,6 +44,6 @@ public class JeysonTest {
   @Test
   public void testExpressoin() throws Exception {
     Spec sample = support.getSample("/specs/expression_spec.json");
-//    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
+    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
   }
 }
