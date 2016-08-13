@@ -37,3 +37,7 @@
 - use java IDE debugger inside the CompileParam.log method.
 
 
+
+
+run main 
+java -cp Jeyson.jar Main

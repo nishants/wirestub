@@ -149,6 +149,7 @@
                             <Class-Path>.</Class-Path>
                         </manifestEntries>
                     </archive>
+                    <outputDirectory>${project.basedir}/</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
