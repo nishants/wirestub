@@ -19,7 +19,7 @@ public class Jeyson {
     engine = (ScriptObjectMirror) jsObject;
   }
 
-  public String compile(Map scope, String template) throws ScriptException, NoSuchMethodException, IOException {
-    return ((ScriptObjectMirror)engine.get("compile")).call(engine, scope, template).toString();
+  public Map compile(Map scope, String template) throws ScriptException, NoSuchMethodException, IOException {
+    return (Map)((ScriptObjectMirror)engine.get("compile")).call(engine, scope, template);
   }
 }

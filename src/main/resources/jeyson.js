@@ -313,7 +313,7 @@ function jeyson(jeysonConfig){
     return {
         compile: function(scope, template){
             var result = compiler.$compile(scope, jeysonConfig.parseJson(template), jeysonConfig);
-            return jeysonConfig.stringify(objectFixture(result));
+            return objectFixture(result);
         }
     };
 }
