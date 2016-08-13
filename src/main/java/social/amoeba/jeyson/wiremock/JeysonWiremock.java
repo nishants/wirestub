@@ -34,6 +34,7 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
     if(isJsonFileResponse){
       try {
+        response.withHeader("Content-Type", "application/json");
         response = response.withBody(parse(templatesPath, readFile(templatesPath, bodyFileName)));
       } catch (IOException e) {
         e.printStackTrace();
