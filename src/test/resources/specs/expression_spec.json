@@ -1,5 +1,5 @@
 {
-  "scope"    : {"shared_tempate_path" : "shared/shared.json", "request" : {"userNames": ["one", "two", "three"]}},
+  "scope"    : {"shared_tempate_path" : "shared/shared.json", "request" : {"names": ["one", "two", "three"]}},
   "template" : {
     "message"   : "hello",
     "float"     : "{{1 + 0.1 }}",
@@ -8,7 +8,7 @@
     "boolean"   : "{{1 == 2}}",
     "list"      : "{{ 'one,two,three,four,five'.split(',') }}",
     "repeater"  : {
-                    "@repeat" : "name in request.userNames",
+                    "@repeat" : "name in request.names",
                     "id": "{{(1 +$index) + '-' + name}}"
     },
     "included-file"  : {"@include": "{{shared_tempate_path}}"}
