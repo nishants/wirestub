@@ -40,4 +40,10 @@ public class JeysonTest {
     Spec sample = support.getSample("/specs/include_template_spec.json");
     assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
   }
+
+  @Test
+  public void testExpressoin() throws Exception {
+    Spec sample = support.getSample("/specs/expression_spec.json");
+//    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
+  }
 }

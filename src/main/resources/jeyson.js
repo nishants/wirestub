@@ -1,5 +1,26 @@
 function jeyson(jeysonConfig){
     var
+        arraysFixture = function(array){
+            var list = new java.util.ArrayList;
+            for(var i = 0 ; i < array.length; i++){
+                list.add(array[i]);
+            }
+            return list;
+        },
+        objectFixture = function(json){
+            for(var field in json){
+                var value       = json[field],
+                    isArray     = value instanceof Array,
+                    isSubtree   = (typeof value == "object") && !(value instanceof Array);
+                if(isSubtree){
+                    json[field] = objectFixture(json[field]);
+                }
+                if(isArray){
+                    json[field] = arraysFixture(json[field]);
+                }
+            }
+            return json;
+        },
         createDirectives = function(){
             var repeater = {
                     link: function(scope, template, params, compile){
@@ -56,7 +77,10 @@ function jeyson(jeysonConfig){
                     jeysonConfig.deleteField(directive.name, template);
 
                     var replace = directive.directive.link(scope, template, param, compile, getTemplate);
-                    template = replace || compile(scope, template); // replace if directive returns valid value, else compile the template after directoryis done
+
+                    template = replace || compile(scope, template); // replace if directive returns valid
+// value, else compile the template after directoryis done
+
                     return template;
                 }
             };
@@ -91,6 +115,7 @@ function jeyson(jeysonConfig){
 
                 return toStr.call(arr) === '[object Array]';
             };
+
 
             var isPlainObject = function isPlainObject(obj) {
                 if (!obj || toStr.call(obj) !== '[object Object]') {
@@ -215,9 +240,6 @@ function jeyson(jeysonConfig){
         templates = {
             create: function(template){
                 template.__ = true; //TODO for trnsitioning to template model
-                template.deleteDirective = function(name){
-                    jeysonConfig.log(name, this);
-                };
                 template.isDirective = function(){
                     for(var field in this){
                         if(field.startsWith("@")) {return true;}
@@ -271,13 +293,15 @@ function jeyson(jeysonConfig){
 
                     result[node] = isSubtree ? this.compile(scope, value, config) : linker.link(scope, value);
                 }
+
                 return result.render();
             }
         };
 
     return {
         compile: function(scope, template){
-            return jeysonConfig.stringify(compiler.$compile(scope, jeysonConfig.parseJson(template), jeysonConfig));
+            var result = compiler.$compile(scope, jeysonConfig.parseJson(template), jeysonConfig);
+            return jeysonConfig.stringify(objectFixture(result));
         }
     };
 }
