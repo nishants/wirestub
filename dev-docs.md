@@ -19,7 +19,7 @@
 - The CompileParam class is used to link the callbacks from java environment to nashorn.
 - the jeyson.js script itself uses fixtures to map nashorn js objects to java objects
 
-- the script loads up on creating a Jeyson instance (hence takes template path in constructor)
+- the script loads up on creating a Jeyson instance (it takes template path in constructor, to calculate the relative path of included json temlpates)
 - on creation Jeyson object loads the js script, passing a CompileParam object to script
 - for every call to compile the Jeyson object invokes the scripts compile function
 - script's compile function evaluates result and transforms using fixture to nashorn-java compatible objects
