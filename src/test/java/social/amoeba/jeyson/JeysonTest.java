@@ -7,7 +7,6 @@ import social.amoeba.TestSupport.Spec;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 
-import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
@@ -30,7 +29,7 @@ public class JeysonTest {
 
   @Before
   public void setUp() throws Exception {
-    jeyson = new Jeyson(support.absolute(jeysonJsPath),support.absolute(templatesPath));
+    jeyson = new Jeyson(support.absolute(templatesPath));
   }
 
   @Test

@@ -5,24 +5,25 @@ import org.junit.Before;
 import org.junit.Test;
 import social.amoeba.TestSupport;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class JSFileTest {
 
-  private String path;
-  private Arguments args;
-  private Path filePath;
   private JSFile JSFile;
-  private TestSupport support = new TestSupport();
 
   @Before
   public void setUp() throws Exception {
-    path = support.absolute("/sample-script.js");
-    JSFile = new JSFile(path);
+    try (BufferedReader buffer = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/sample-script.js")))) {
+      String jsScript = buffer.lines().collect(Collectors.joining("\n"));
+      JSFile = new JSFile(jsScript);
+    }
   }
 
   @Test

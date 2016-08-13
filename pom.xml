@@ -89,8 +89,8 @@
                             <outputDirectory>${basedir}/target/Jeyson</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>resources</directory>
-                                    <filtering>true</filtering>
+                                    <directory>${project.basedir}/src/resources</directory>
+                                    <!--<filtering>true</filtering>-->
                                 </resource>
                             </resources>
                         </configuration>

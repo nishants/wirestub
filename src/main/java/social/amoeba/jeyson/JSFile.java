@@ -14,9 +14,9 @@ import java.nio.file.Paths;
 public class JSFile {
   private final Invocable scriptEnginge;
 
-  public JSFile(String path) throws IOException, ScriptException, URISyntaxException {
+  public JSFile(String code) throws IOException, ScriptException, URISyntaxException {
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-    engine.eval(Files.newBufferedReader(Paths.get(path), StandardCharsets.UTF_8));
+    engine.eval(code);
     this.scriptEnginge = (Invocable) engine;
   }
 
