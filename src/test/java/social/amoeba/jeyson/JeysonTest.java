@@ -15,8 +15,8 @@ import static org.junit.Assert.assertThat;
 public class JeysonTest {
 
   private Jeyson jeyson;
-  private String __files      = "/__files";
-  private String __helloFile  = "/__files/hello/hello.json";
+  private String templatesPath  = "/__files";
+  private String __helloFile    = "/__files/hello/hello.json";
   private String __includeFile  = "/__files/include.json";
   private String helloFileContent;
   private String includeFileContent;
@@ -24,7 +24,7 @@ public class JeysonTest {
 
   @Before
   public void setUp() throws Exception {
-    jeyson = new Jeyson(Paths.get(this.getClass().getResource(__files).toURI()));
+    jeyson = new Jeyson(Paths.get(this.getClass().getResource(templatesPath).toURI()));
     helloFileContent = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(__helloFile).toURI())));
     includeFileContent = new String(Files.readAllBytes(Paths.get(this.getClass().getResource(__includeFile).toURI())));
   }
@@ -46,6 +46,7 @@ public class JeysonTest {
     Spec sample = support.getSample("/specs/expression_spec.json");
     assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
   }
+
   @Test
   public void testScope() throws Exception {
     Spec sample = support.getSample("/specs/scope_spec.json");

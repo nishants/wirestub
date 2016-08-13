@@ -13,9 +13,9 @@ public class Jeyson {
   private final ScriptObjectMirror engine;
   private final String jsEngine = "/jeyson.js";
 
-  public Jeyson(Path __files) throws IOException, ScriptException, NoSuchMethodException, URISyntaxException {
+  public Jeyson(Path tempatesPath) throws IOException, ScriptException, NoSuchMethodException, URISyntaxException {
     JSFile script = new JSFile(jsEngine);
-    Object jsObject = script.execute("jeyson", new CompileParam(__files));
+    Object jsObject = script.execute("jeyson", new CompileParam(tempatesPath));
     engine = (ScriptObjectMirror) jsObject;
   }
 
