@@ -1,4 +1,7 @@
 {
   "status": 200,
-  "body" : "this is from a body"
+  "body" : {
+    "message" : "this is from a file",
+    "sum" : "{{1+2}}"
+  }
 }
