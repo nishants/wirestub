@@ -15,19 +15,22 @@ import static org.junit.Assert.assertThat;
 
 public class JeysonTest {
 
-  private Jeyson jeyson;
-  private String templatesPath  = "/templates";
-  private TestSupport support   = new TestSupport();
-  private String[]     specs    = new String[]{
+  private final String jeysonJsPath   = "/jeyson.js";
+  private final String templatesPath  = "/templates";
+
+  private final String[]     specs    = new String[]{
       "/specs/include_template_spec.json  :should include json with relative paths",
       "/specs/expression_spec.json        :should support expressions for primitive types",
       "/specs/scope_spec.json             :should support accessing scope values by reference in expressoins",
       "/specs/plain_old.json              :every json must be a valid jeyson template",
   };
 
+  private Jeyson jeyson;
+  private TestSupport support   = new TestSupport();
+
   @Before
   public void setUp() throws Exception {
-    jeyson = new Jeyson(support.absolute("/jeyson.js"),Paths.get(this.getClass().getResource(templatesPath).toURI()).toAbsolutePath());
+    jeyson = new Jeyson(support.absolute(jeysonJsPath),support.absolute(templatesPath));
   }
 
   @Test
