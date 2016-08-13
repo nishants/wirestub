@@ -1,14 +1,13 @@
 package social.amoeba.jeyson;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import org.junit.Before;
 import org.junit.Test;
-import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
+import social.amoeba.TestSupport;
+import social.amoeba.TestSupport.Spec;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -21,6 +20,7 @@ public class JeysonTest {
   private String __includeFile  = "/__files/include.json";
   private String helloFileContent;
   private String includeFileContent;
+  private TestSupport support = new TestSupport();
 
   @Before
   public void setUp() throws Exception {
@@ -37,7 +37,7 @@ public class JeysonTest {
 
   @Test
   public void testCompileinclude() throws Exception {
-    String result = jeyson.compile(Collections.emptyMap(), includeFileContent);
-    assertThat(result, is("{\"message\":{\"body\":{\"shared\":\"a shared json template\"}}}"));
+    Spec sample = support.getSample("/specs/include_template_spec.json");
+    assertThat(jeyson.compile(sample.scope, sample.template), is(sample.expected));
   }
 }
