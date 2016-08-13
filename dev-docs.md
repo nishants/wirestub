@@ -14,7 +14,7 @@
 - update specs in JeysonTest.java
 - clean and verify
 
-# How it works
+# Design
 - the src/resources/jeyson.js is the js script which implements the template engine and provides js env for expressions in templates.
 
 - The CompileParam class is used to link the callbacks from java environment to nashorn.
