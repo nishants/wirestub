@@ -32,7 +32,7 @@
 - the result is a Map object that represents a json tree.
  
 
-Debugging Inside JS Script
+# Debugging Inside JS Script
 - inside js script invoke jeysonConfig.log(param1,...paramN)
 - use java IDE debugger inside the CompileParam.log method.
 
