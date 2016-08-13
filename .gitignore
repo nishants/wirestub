@@ -2,3 +2,5 @@
 target/
 wiremock-standalone-2.1.9.jar
 *.iml
+jeyson-1.0-SNAPSHOT-jar-with-dependencies.jar
+
