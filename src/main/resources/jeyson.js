@@ -1,5 +1,8 @@
 function jeyson(jeysonConfig){
     var
+        isExpression = function(string){
+            return string.startsWith("{{") && string.endsWith("}}");
+        },
         numberFixture = function(number){
             var isInt = number % 1 === 0;
             return isInt ? new java.lang.Integer(number) : number;
@@ -86,6 +89,10 @@ function jeyson(jeysonConfig){
                     }
                     param = template[directive.name];
                     jeysonConfig.deleteField(directive.name, template);
+
+                    if(isExpression(param)){
+                        param = scope.execute(param);
+                    }
 
                     var replace = directive.directive.link(scope, template, param, compile, getTemplate);
 
