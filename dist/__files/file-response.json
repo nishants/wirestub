@@ -1,0 +1,15 @@
+{
+  "status": 200,
+  "body" : {
+    "message"   : "hello",
+    "float"     : "{{1 + 0.1 }}",
+    "sum"       : "{{0 + 1 }}",
+    "nil"       : "{{null}}",
+    "boolean"   : "{{1 == 2}}",
+    "list"      : "{{ 'one,two,three,four,five'.split(',') }}",
+    "repeater"  : {
+      "@repeat" : "name in ['one', 'two', 'three']",
+      "id": "{{(1 +$index) + '-' + name}}"
+    }
+  }
+}
