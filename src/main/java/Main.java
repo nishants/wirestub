@@ -14,7 +14,7 @@ public class Main {
     int port = 8819;
     String portFlag = "--port";
     for(int i = 0 ; i < args.length; i++ ){
-      if(args[i] == portFlag){
+      if(args[i].equals(portFlag) ){
         port = Integer.parseInt(args[i+1]);
       }
     }
