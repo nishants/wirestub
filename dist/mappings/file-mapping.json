@@ -1,6 +1,6 @@
 {
   "request": {
-    "method": "GET",
+    "method": "PUT",
     "url": "/file"
   },
   "response": {

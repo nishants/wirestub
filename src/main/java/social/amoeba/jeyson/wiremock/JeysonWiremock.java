@@ -29,13 +29,18 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
     String bodyFileName        = responseDefinition.getBodyFileName();
     boolean isJsonFileResponse = bodyFileName == null ? false : bodyFileName.endsWith(".json");
     String templatesPath       = files.getPath();
-
+    Map requestBody  = null ;
+    try {
+      requestBody = Json.parse(new String(request.getBody()), Map.class);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     ResponseDefinitionBuilder response = new ResponseDefinitionBuilder().like(responseDefinition);
 
     if(isJsonFileResponse){
       try {
         response.withHeader("Content-Type", "application/json");
-        response = response.withBody(parse(templatesPath, readFile(templatesPath, bodyFileName)));
+        response = response.withBody(parse(requestBody, templatesPath, readFile(templatesPath, bodyFileName)));
       } catch (IOException e) {
         e.printStackTrace();
       } catch (NoSuchMethodException e) {
@@ -49,9 +54,14 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
     return response.build();
   }
 
-  private String parse(String templatesPath, String template) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
+  private String parse(Map requestBody, String templatesPath, String template) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     template = Json.stringify(Json.parse(template, Map.class));
-    Map compiled = new Jeyson(templatesPath).compile(new HashMap(), template);
+    HashMap scope = new HashMap();
+    HashMap reqeust = new HashMap();
+    reqeust.put("body", requestBody);
+    scope.put("request", reqeust);
+
+    Map compiled = new Jeyson(templatesPath).compile(scope, template);
     return new ObjectMapper().writeValueAsString(compiled);
   }
 
