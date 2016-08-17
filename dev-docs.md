@@ -4,6 +4,11 @@
 - git clone repo
 - mvn clean compile
 
+#Build
+mvn compile package
+
+Find standalone jar at project base "jeyson-1.0-SNAPSHOT-jar-with-dependencies"
+
 * not tested on java versions lower than 8, might work as long as a ScriptEngine is available (java 6+)
 
 # Clean and Run Tests
