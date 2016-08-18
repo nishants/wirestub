@@ -14,40 +14,44 @@ import javax.script.ScriptException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JeysonWiremock extends ResponseDefinitionTransformer {
+
+  private final Logger logger;
+
+  public JeysonWiremock(){
+    logger = LoggerFactory.getLogger(JeysonWiremock.class);
+  }
 
   @Override
   public ResponseDefinition transform(Request request,
                                       ResponseDefinition responseDefinition,
                                       FileSource files,
                                       Parameters parameters) {
-    String bodyFileName        = responseDefinition.getBodyFileName();
-    boolean isJsonFileResponse = bodyFileName == null ? false : bodyFileName.endsWith(".json");
-    String templatesPath       = files.getPath();
-    Map requestBody  = null ;
-    try {
-      requestBody = Json.parse(new String(request.getBody()), Map.class);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    ResponseDefinitionBuilder response = new ResponseDefinitionBuilder().like(responseDefinition);
+
+    String bodyFileName         = responseDefinition.getBodyFileName();
+    String templatesPath        = files.getPath();
+    Map requestBody             = null ;
+    boolean isJsonFileResponse  = bodyFileName == null ? false : bodyFileName.endsWith(".json");
+
+    ResponseDefinitionBuilder response =
+        new ResponseDefinitionBuilder()
+            .like(responseDefinition);
 
     if(isJsonFileResponse){
       try {
+        requestBody = Json.parse(new String(request.getBody()), Map.class);
         response.withHeader("Content-Type", "application/json");
         response = response.withBody(parse(requestBody, templatesPath, readFile(templatesPath, bodyFileName)));
-      } catch (IOException e) {
-        e.printStackTrace();
-      } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-      } catch (ScriptException e) {
-        e.printStackTrace();
-      } catch (URISyntaxException e) {
+      } catch (Exception e) {
+        String errorMessage = "************* Jeyson Error *******************" + File.separator;
+        errorMessage += "bodyFile : :bodyFile, templatesPath :  :templatesPath" + File.separator;;
+        errorMessage += e.getMessage();
+        logger.error(errorMessage);
         e.printStackTrace();
       }
     }
