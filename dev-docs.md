@@ -5,7 +5,8 @@
 - mvn clean compile
 
 #Build
-mvn compile package
+./package.sh
+This will replace Jeyson.jar in dist directory.
 
 Find standalone jar at project base "jeyson-1.0-SNAPSHOT-jar-with-dependencies"
 

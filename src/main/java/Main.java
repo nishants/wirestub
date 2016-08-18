@@ -19,6 +19,8 @@ public class Main {
         port = Integer.parseInt(args[i+1]);
       }
     }
+
+    System.out.println("Running on port : " + port);
     Main.class.getProtectionDomain().getCodeSource().getLocation().getFile();
     String jarPath = Main.class.getProtectionDomain().getCodeSource().getLocation().getFile(),
            dir     = new File(jarPath).getParent();
