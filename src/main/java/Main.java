@@ -1,4 +1,5 @@
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
 import social.amoeba.jeyson.wiremock.JeysonWiremock;
 
 import javax.script.ScriptException;
@@ -25,6 +26,7 @@ public class Main {
     final WireMockServer wireMockServer = new WireMockServer(options()
         .extensions(new JeysonWiremock())
         .usingFilesUnderDirectory(dir)
+        .notifier(new ConsoleNotifier(true))
         .port(port)); //No-args constructor will start on config 8080, no HTTPS
 
     wireMockServer.start();
