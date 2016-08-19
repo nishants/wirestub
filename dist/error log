@@ -1,0 +1,38 @@
+wiremock.com.fasterxml.jackson.databind.JsonMappingException: No content to map due to end-of-input
+ at [Source: ; line: 1, column: 1]
+        at wiremock.com.fasterxml.jackson.databind.JsonMappingException.from(JsonMappingException.java:148)
+        at wiremock.com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:3747)
+        at wiremock.com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:3687)
+        at wiremock.com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2714)
+        at social.amoeba.jeyson.Json.parse(Json.java:10)
+        at social.amoeba.jeyson.wiremock.JeysonWiremock.transform(JeysonWiremock.java:34)
+        at com.github.tomakehurst.wiremock.stubbing.InMemoryStubMappings.applyTransformations(InMemoryStubMappings.java:
+93)
+        at com.github.tomakehurst.wiremock.stubbing.InMemoryStubMappings.serveFor(InMemoryStubMappings.java:76)
+        at com.github.tomakehurst.wiremock.core.WireMockApp.serveStubFor(WireMockApp.java:104)
+        at com.github.tomakehurst.wiremock.http.StubRequestHandler.handleRequest(StubRequestHandler.java:32)
+        at com.github.tomakehurst.wiremock.http.AbstractRequestHandler.handle(AbstractRequestHandler.java:41)
+        at com.github.tomakehurst.wiremock.servlet.WireMockHandlerDispatchingServlet.service(WireMockHandlerDispatchingS
+ervlet.java:99)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+        at wiremock.org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
+        at wiremock.org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+        at wiremock.org.eclipse.jetty.servlets.UserAgentFilter.doFilter(UserAgentFilter.java:83)
+        at wiremock.org.eclipse.jetty.servlets.GzipFilter.doFilter(GzipFilter.java:364)
+        at wiremock.org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at wiremock.org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+        at wiremock.org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+        at wiremock.org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+        at wiremock.org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+        at wiremock.org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+        at wiremock.org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
+        at wiremock.org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+        at wiremock.org.eclipse.jetty.server.Server.handle(Server.java:499)
+        at wiremock.org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+        at wiremock.org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+        at wiremock.org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+        at wiremock.org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+        at wiremock.org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+        at java.lang.Thread.run(Unknown Source)
+2016-08-19 11:38:56.794 Request received:
+10.97.213.154 - GET /sps-eac-web/customers/262217820/awardsOverview
