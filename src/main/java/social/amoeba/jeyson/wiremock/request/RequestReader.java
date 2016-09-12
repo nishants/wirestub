@@ -9,6 +9,17 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class RequestReader {
+  public static Map queryParams(String url){
+    HashMap params = new HashMap<>();
+    if(url.contains("?")){
+      String[] pairs = url.split("\\?")[1].split("&");
+      for(int i = 0 ; i < pairs.length; i++){
+        String[] values = pairs[i].split("=");
+        params.put(values[0], values[1]);
+      }
+    }
+    return params;
+  }
   public static Map read(Request request) throws IOException {
     String mimeType = request.getHeaders().getContentTypeHeader().mimeTypePart();
     boolean isJSON = mimeType.equalsIgnoreCase("application/json"),
@@ -16,7 +27,8 @@ public class RequestReader {
 
     Map body = isJSON ? JSON.parse(request.getBody()) : isXML ? XML.parse(request.getBody()) : null,
         headers = new HashMap<>(),
-        result = new HashMap<>();
+        result = new HashMap<>(),
+        cookies = new HashMap<>();
 
     Iterator<HttpHeader> iterator = request.getHeaders().all().iterator();
     while(iterator.hasNext()){
@@ -26,6 +38,8 @@ public class RequestReader {
 
     result.put("body"   , body);
     result.put("headers", headers);
+    result.put("cookies", request.getCookies());
+    result.put("query", queryParams(request.getUrl()));
 
     return result;
   }

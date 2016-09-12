@@ -73,6 +73,7 @@ public class TestSupport {
     Request mocked = mock(Request.class);
 
     when(mocked.getHeaders()).thenReturn(headers(mime));
+    when(mocked.getUrl()).thenReturn("/some/fome/abs");
     when(mocked.getBody()).thenReturn(body.replaceAll("'", "\"").getBytes());
     return mocked;
   }
