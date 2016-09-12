@@ -13,7 +13,7 @@ public abstract class RequestReader {
     boolean isJSON = mimeType.equalsIgnoreCase("application/json"),
             isXML  = mimeType.equalsIgnoreCase("application/xml") || mimeType.equalsIgnoreCase("text/xml");
 
-    return isJSON ? new JSONRequestReader(request.getBody()).parse() : null;
+    return isJSON ? new JSONRequestReader(request.getBody()).parse() : isXML ? new XMLRequestReader(request.getBody()).parse() : null;
   }
 
 }

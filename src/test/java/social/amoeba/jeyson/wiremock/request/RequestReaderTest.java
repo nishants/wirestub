@@ -26,10 +26,30 @@ public class RequestReaderTest {
     assertThat(actual, is(expected));
   }
 
+  @Test
+  public void parseXMLRequest() throws IOException {
+    Map actual        = RequestReader.read(xmlRequestBody("<body><message>hello</message></body>")),
+        expected      = new HashMap<>(),
+        expectedBody  = new HashMap<>();
+
+    expectedBody.put("message", "hello");
+    expected.put("body", expectedBody);
+
+    assertThat(actual, is(expected));
+  }
+
   private Request jsonRequestBody(String body){
+    return createRequest("application/json", body);
+  }
+
+  private Request xmlRequestBody(String body){
+    return createRequest("application/xml", body);
+  }
+
+  private Request createRequest(String mime,String body){
     Request mocked = mock(Request.class);
 
-    HttpHeader contentTypeHeader = new HttpHeader("Content-Type", "application/json");
+    HttpHeader contentTypeHeader = new HttpHeader("Content-Type", mime);
     HttpHeaders headers = new HttpHeaders(new HttpHeader[]{contentTypeHeader});
 
     when(mocked.getHeaders()).thenReturn(headers);
