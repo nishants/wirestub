@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public abstract class ResponseProcessor {
+public abstract class ResponseBuilder {
   public static Map render(
       Map scope,
       ResponseDefinition responseDefinition,
@@ -14,6 +14,6 @@ public abstract class ResponseProcessor {
 
 
     File bodyFile = new File(templatesPath, responseDefinition.getBodyFileName());
-    return XMLReader.parse(bodyFile);
+    return XML.parse(bodyFile);
   }
 }

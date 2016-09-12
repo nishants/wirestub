@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class XMLReader{
+public class XML {
   private static final XmlMapper xmlMapper = new XmlMapper();
 
   public static Map parse(byte[] body) throws IOException {

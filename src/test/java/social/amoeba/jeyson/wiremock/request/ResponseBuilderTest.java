@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 import static social.amoeba.TestSupport.createTempFile;
 import static social.amoeba.TestSupport.xmlResponseDefinition;
 
-public class ResponseProcessorTest {
+public class ResponseBuilderTest {
   @Rule
   public TemporaryFolder temporaryFolder= new TemporaryFolder();
 
@@ -26,7 +26,7 @@ public class ResponseProcessorTest {
     File templateFile = createTempFile(bodyFileName, contents);
 
     Map scope         = Collections.emptyMap(),
-        actual        = ResponseProcessor.render(scope, xmlResponseDefinition(templateFile), templateFile.getParentFile()),
+        actual        = ResponseBuilder.render(scope, xmlResponseDefinition(templateFile), templateFile.getParentFile()),
         expected      = new HashMap<>(),
         expectedBody  = new HashMap<>();
 
