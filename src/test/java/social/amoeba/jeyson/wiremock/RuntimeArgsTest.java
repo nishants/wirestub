@@ -14,8 +14,8 @@ public class RuntimeArgsTest {
   @Test
   public void addProperties() throws InterruptedException, NoSuchMethodException, ScriptException, IOException, URISyntaxException {
     String[] args     = {"--verbose","--port", "5123"},
-             expected = {"--verbose","--port", "5123", "--extensions", "social.amoeba.jeyson.wiremock.JeysonWiremock"},
-             actual   = RuntimeArgs.like(args);
+             expected = {"--verbose", "--port", "5123", "--extensions", "social.amoeba.jeyson.wiremock.JeysonWiremock", "--root-dir", "/Users/dawn/Documents/projects/jeyson-java"},
+             actual   = RuntimeArgs.set(args);
 
     assertThat(actual, is(expected));
 

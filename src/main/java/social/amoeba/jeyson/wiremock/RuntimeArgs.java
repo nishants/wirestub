@@ -1,20 +1,25 @@
 package social.amoeba.jeyson.wiremock;
 
+import java.io.File;
+import java.net.URISyntaxException;
+
 import static java.util.stream.IntStream.range;
 
 public class RuntimeArgs {
-  private static final String[] RUN_TIME_ARGS = new String[]{
-      "--extensions",
-      "social.amoeba.jeyson.wiremock.JeysonWiremock"
-  };
-  public static String[] like(String[] args){
-    String[] enhanced = new String[args.length  + 2];
+  public static String[] set(String[] args) throws URISyntaxException {
+    String[] params = new String[]{
+        "--extensions",
+        JeysonWiremock.class.getName(),
+        "--root-dir",
+        new File(RuntimeArgs.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent()
+    };
+    String[] enhanced = new String[args.length  + params.length];
 
     range(0, args.length)
         .forEach(index -> enhanced[index] = args[index]);
 
-    range(0, RUN_TIME_ARGS.length)
-        .forEach(index -> enhanced[args.length + index] = RUN_TIME_ARGS[index]);
+    range(0, params.length)
+        .forEach(index -> enhanced[args.length + index] = params[index]);
 
     return enhanced;
   }
