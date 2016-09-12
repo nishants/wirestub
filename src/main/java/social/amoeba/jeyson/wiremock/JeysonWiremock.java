@@ -21,12 +21,6 @@ import org.slf4j.LoggerFactory;
 
 public class JeysonWiremock extends ResponseDefinitionTransformer {
 
-  private final Logger logger;
-
-  public JeysonWiremock(){
-    logger = LoggerFactory.getLogger(JeysonWiremock.class);
-  }
-
   @Override
   public ResponseDefinition transform(Request request,
                                       ResponseDefinition responseDefinition,
@@ -47,11 +41,13 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
         requestBody = Json.parse(new String(request.getBody()), Map.class);
         response.withHeader("Content-Type", "application/json");
         response = response.withBody(parse(requestBody, templatesPath, readFile(templatesPath, bodyFileName)));
+      } catch (wiremock.com.fasterxml.jackson.core.JsonParseException e) {
+        System.out.println("Non Json API");
       } catch (Exception e) {
-        String errorMessage = "************* Jeyson Error *******************" + File.separator;
-        errorMessage += "bodyFile : :bodyFile, templatesPath :  :templatesPath" + File.separator;;
+        String errorMessage = "************* Jeyson Error *******************"  + System.getProperty("line.separator");
+        errorMessage += "bodyFile : :bodyFile, templatesPath :  :templatesPath" + System.getProperty("line.separator");
         errorMessage += e.getMessage();
-        logger.error(errorMessage);
+        System.err.println(errorMessage);
         e.printStackTrace();
       }
     }
