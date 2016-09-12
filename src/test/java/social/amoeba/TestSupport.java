@@ -74,10 +74,6 @@ public class TestSupport {
   }
 
   private static HttpHeaders headers(String mime){
-    HttpHeaders headers = new HttpHeaders(new HttpHeader[]{
-        new HttpHeader("Content-Type", mime),
-        });
-
-    return headers;
+    return new HttpHeaders(new HttpHeader[]{new HttpHeader("Content-Type", mime),});
   }
 }
