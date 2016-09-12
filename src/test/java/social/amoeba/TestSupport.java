@@ -56,8 +56,12 @@ public class TestSupport {
   public static Request xmlRequestBody(String body){
     return createRequest("application/xml", body);
   }
+
   public static File createTempFile(String bodyFileName, String contents) throws IOException {
     File file = new File(System.getProperty("java.io.tmpdir"), bodyFileName);
+    if(bodyFileName.endsWith("json")){
+      contents = contents.replaceAll("'", "\"");
+    }
     file.createNewFile();
     FileWriter fileWriter = new FileWriter(file, false);
     fileWriter.write(contents);

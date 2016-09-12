@@ -14,11 +14,11 @@ public class XML {
     return xmlMapper.readValue(String.format("<request>%s</request>", new String(body)), Map.class);
   }
 
-  public static Map parse(String string) throws IOException {
+  public static Map parseXML(String string) throws IOException {
     return parse(string.getBytes());
   }
 
   public static Map parse(File file) throws IOException {
-    return parse(new Scanner(file).useDelimiter("\\Z").next());
+    return parseXML(new Scanner(file).useDelimiter("\\Z").next());
   }
 }

@@ -1,22 +1,18 @@
 package social.amoeba.jeyson.wiremock.request;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static social.amoeba.TestSupport.createTempFile;
-import static social.amoeba.TestSupport.xmlResponseDefinition;
+import static social.amoeba.jeyson.wiremock.request.JSON.parseJSON;
+import static social.amoeba.jeyson.wiremock.request.XML.parseXML;
 
 public class ResponseBuilderTest {
-  @Rule
-  public TemporaryFolder temporaryFolder= new TemporaryFolder();
 
   @Test
   public void parseXMLFile() throws IOException {
@@ -25,13 +21,23 @@ public class ResponseBuilderTest {
 
     File templateFile = createTempFile(bodyFileName, contents);
 
-    Map scope         = Collections.emptyMap(),
-        actual        = ResponseBuilder.render(scope, xmlResponseDefinition(templateFile), templateFile.getParentFile()),
-        expected      = new HashMap<>(),
-        expectedBody  = new HashMap<>();
+    Map scope    = Collections.emptyMap(),
+        actual   = ResponseBuilder.render(scope, templateFile),
+        expected = parseXML("<body><message>hello</message></body>");
 
-    expectedBody.put("message", "hello");
-    expected.put("body", expectedBody);
+    assertThat(actual, is(expected));
+  }
+
+  @Test
+  public void parseJsonFile() throws IOException {
+    String bodyFileName = "some.json",
+           contents     = "{'body' : {'message' : 'hello'}}";
+
+    File templateFile = createTempFile(bodyFileName, contents);
+
+    Map scope    = Collections.emptyMap(),
+        actual   = ResponseBuilder.render(scope, templateFile),
+        expected = parseJSON("{'body' : {'message' : 'hello'}}");
 
     assertThat(actual, is(expected));
   }
