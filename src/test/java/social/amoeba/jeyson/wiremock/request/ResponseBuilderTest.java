@@ -9,8 +9,6 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static social.amoeba.TestSupport.createTempFile;
-import static social.amoeba.jeyson.wiremock.request.JSON.parseJSON;
-import static social.amoeba.jeyson.wiremock.request.XML.parseXML;
 
 public class ResponseBuilderTest {
 
@@ -23,7 +21,7 @@ public class ResponseBuilderTest {
 
     Map scope    = Collections.emptyMap();
 
-    String actual = ResponseBuilder.render(scope, templateFile),
+    String actual = new String(ResponseBuilder.readTemplate(templateFile)),
         expected = "<body><message>hello</message></body>";
     assertThat(actual, is(expected));
   }
@@ -37,7 +35,7 @@ public class ResponseBuilderTest {
 
     Map scope    = Collections.emptyMap();
 
-    String actual   = ResponseBuilder.render(scope, templateFile),
+    String actual   = new String(ResponseBuilder.readTemplate(templateFile)),
            expected = "{'body' : {'message' : 'hello'}}".replaceAll("'", "\"");
 
     assertThat(actual, is(expected));
