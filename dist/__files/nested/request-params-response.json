@@ -1,0 +1,7 @@
+{
+  "status": 200,
+  "body" : {
+    "message"   : "hello",
+    "queries"   : {"time" : "{{request.query.time}}", "message" : "{{request.query.message}}"}
+  }
+}

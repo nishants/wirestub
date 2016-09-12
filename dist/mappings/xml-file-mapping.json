@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "PUT",
+    "url": "/xml"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "nested/sample.xml",
+    "transformerParameters" : {
+      "controller" : "createUserController"
+    }
+  }
+}

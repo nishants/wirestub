@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "PUT",
+    "urlPattern": "/hello/.*"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "nested/request-params-response.json",
+    "transformerParameters" : {
+      "controller" : "createUserController"
+    }
+  }
+}
