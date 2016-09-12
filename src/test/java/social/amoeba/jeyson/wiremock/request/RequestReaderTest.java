@@ -12,6 +12,8 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
+import static social.amoeba.TestSupport.jsonRequestBody;
+import static social.amoeba.TestSupport.xmlRequestBody;
 
 public class RequestReaderTest {
   @Test
@@ -38,22 +40,4 @@ public class RequestReaderTest {
     assertThat(actual, is(expected));
   }
 
-  private Request jsonRequestBody(String body){
-    return createRequest("application/json", body);
-  }
-
-  private Request xmlRequestBody(String body){
-    return createRequest("application/xml", body);
-  }
-
-  private Request createRequest(String mime,String body){
-    Request mocked = mock(Request.class);
-
-    HttpHeader contentTypeHeader = new HttpHeader("Content-Type", mime);
-    HttpHeaders headers = new HttpHeaders(new HttpHeader[]{contentTypeHeader});
-
-    when(mocked.getHeaders()).thenReturn(headers);
-    when(mocked.getBody()).thenReturn(body.replaceAll("'", "\"").getBytes());
-    return mocked;
-  }
 }

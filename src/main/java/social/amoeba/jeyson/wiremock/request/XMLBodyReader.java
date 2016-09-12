@@ -5,11 +5,11 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.IOException;
 import java.util.Map;
 
-public class XMLRequestReader extends RequestReader{
+public class XMLBodyReader extends RequestReader{
   private final byte[] body;
   private final XmlMapper xmlMapper;
 
-  public XMLRequestReader(byte[] bodyAsString) {
+  public XMLBodyReader(byte[] bodyAsString) {
     body = bodyAsString;
     xmlMapper = new XmlMapper();
   }
