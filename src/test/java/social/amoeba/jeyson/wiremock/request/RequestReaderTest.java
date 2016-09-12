@@ -16,7 +16,7 @@ public class RequestReaderTest {
   @Test
   public void parseJsonRequest() throws IOException {
     Map actual        = RequestReader.read(jsonRequestBody("{'body' : {'message' : 'hello'}}")),
-        expected      = parseJSON("{'body' : {'message' : 'hello'}}");
+        expected      = parseJSON("{'headers': {'Content-Type' : ['application/json']}, 'body' : {'body' : {'message' : 'hello'}}}");
 
     assertThat(actual, is(expected));
   }
@@ -24,7 +24,7 @@ public class RequestReaderTest {
   @Test
   public void parseXMLRequest() throws IOException {
     Map actual        = RequestReader.read(xmlRequestBody("<body><message>hello</message></body>")),
-        expected      = parseXML("<body><message>hello</message></body>");
+        expected      = parseJSON("{'headers': {'Content-Type' : ['application/xml']}, 'body' : {'body' : {'message' : 'hello'}}}");
 
     assertThat(actual, is(expected));
   }
