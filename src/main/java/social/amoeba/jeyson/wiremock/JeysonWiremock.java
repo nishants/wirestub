@@ -14,6 +14,7 @@ import javax.script.ScriptException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -29,8 +30,9 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
     String bodyFileName         = responseDefinition.getBodyFileName();
     String templatesPath        = files.getPath();
-    Map requestBody             = null ;
-    boolean isJsonFileResponse  = bodyFileName == null ? false : bodyFileName.endsWith(".json");
+    Map requestBody             = Collections.emptyMap();
+    boolean isJsonFileResponse  = bodyFileName == null ? false : bodyFileName.endsWith(".json"),
+            isJsonRequest       = request.getHeaders().getContentTypeHeader().mimeTypePart().equalsIgnoreCase("application/json");
 
     ResponseDefinitionBuilder response =
         new ResponseDefinitionBuilder()
@@ -38,17 +40,16 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
     if(isJsonFileResponse){
       try {
-        requestBody = Json.parse(new String(request.getBody()), Map.class);
+        if(isJsonRequest){
+          requestBody = Json.parse(new String(request.getBody()), Map.class);
+        }
         response.withHeader("Content-Type", "application/json");
         response = response.withBody(parse(requestBody, templatesPath, readFile(templatesPath, bodyFileName)));
-      } catch (wiremock.com.fasterxml.jackson.core.JsonParseException e) {
-        System.out.println("Non Json API");
-      } catch (Exception e) {
+      }  catch (Exception e) {
         String errorMessage = "************* Jeyson Error *******************"  + System.getProperty("line.separator");
         errorMessage += "bodyFile : :bodyFile, templatesPath :  :templatesPath" + System.getProperty("line.separator");
         errorMessage += e.getMessage();
         System.err.println(errorMessage);
-        e.printStackTrace();
       }
     }
     return response.build();
