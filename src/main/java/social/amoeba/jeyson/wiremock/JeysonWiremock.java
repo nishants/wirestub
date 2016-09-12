@@ -7,6 +7,7 @@ import com.github.tomakehurst.wiremock.extension.ResponseDefinitionTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 
+import social.amoeba.jeyson.wiremock.request.RequestReader;
 import social.amoeba.jeyson.wiremock.request.ResponseBuilder;
 
 import javax.script.ScriptException;
@@ -33,6 +34,8 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
       Map scope             = new HashMap<>();
       String templatesHome  = files.getPath(),
              templatePath   = responseDefinition.getBodyFileName();
+
+      scope.put("request", RequestReader.read(request));
 
       if(responseBuilder == null){
         responseBuilder = new ResponseBuilder(templatesHome);
