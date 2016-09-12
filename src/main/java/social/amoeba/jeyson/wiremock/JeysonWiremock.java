@@ -19,6 +19,8 @@ import java.util.Map;
 
 public class JeysonWiremock extends ResponseDefinitionTransformer {
 
+  private ResponseBuilder responseBuilder;
+
   @Override
   public ResponseDefinition transform(Request request,
                                       ResponseDefinition responseDefinition,
@@ -30,11 +32,16 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
     try {
       Map scope             = new HashMap<>();
       String templatesHome  = files.getPath(),
-             relativePath   = responseDefinition.getBodyFileName();
+             templatePath   = responseDefinition.getBodyFileName();
 
-      byte[] responseBody = ResponseBuilder.render(scope, templatesHome, relativePath);
+      if(responseBuilder == null){
+        responseBuilder = new ResponseBuilder(templatesHome);
+      }
+
+      byte[] responseBody = responseBuilder.render(scope, templatePath);
 
       builder = builder.withBody(responseBody);
+      builder = builder.withHeaders(responseBuilder.header(templatePath));
     } catch (IOException e) {
       System.err.println(e.getStackTrace());
     } catch (URISyntaxException e) {
