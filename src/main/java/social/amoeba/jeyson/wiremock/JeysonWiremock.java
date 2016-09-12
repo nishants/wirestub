@@ -30,29 +30,28 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
 
     ResponseDefinitionBuilder builder = new ResponseDefinitionBuilder().like(responseDefinition);
-    try {
       Map scope             = new HashMap<>();
       String templatesHome  = files.getPath(),
              templatePath   = responseDefinition.getBodyFileName();
 
-      scope.put("request", RequestReader.read(request));
+    if (templatePath != null) {
+      try {
+        scope.put("request", RequestReader.read(request));
 
-      if(responseBuilder == null){
-        responseBuilder = new ResponseBuilder(templatesHome);
+        if (responseBuilder == null) {
+          responseBuilder = new ResponseBuilder(templatesHome);
+        }
+
+        byte[] responseBody = responseBuilder.render(scope, templatePath);
+
+        builder = builder.withBody(responseBody);
+        builder = builder.withHeaders(responseBuilder.header(templatePath));
+      } catch (Exception e) {
+        String errorMessage = "************* Jeyson Error *******************" + System.getProperty("line.separator");
+        errorMessage += e.getMessage() + System.getProperty("line.separator");
+        System.err.println(errorMessage);
+        e.printStackTrace();
       }
-
-      byte[] responseBody = responseBuilder.render(scope, templatePath);
-
-      builder = builder.withBody(responseBody);
-      builder = builder.withHeaders(responseBuilder.header(templatePath));
-    } catch (IOException e) {
-      System.err.println(e.getStackTrace());
-    } catch (URISyntaxException e) {
-      System.err.println(e.getStackTrace());
-    } catch (NoSuchMethodException e) {
-      System.err.println(e.getStackTrace());
-    } catch (ScriptException e) {
-      System.err.println(e.getStackTrace());
     }
 
     return builder.build();

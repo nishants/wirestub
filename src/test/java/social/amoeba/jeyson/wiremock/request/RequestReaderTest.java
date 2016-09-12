@@ -10,7 +10,6 @@ import static org.junit.Assert.assertThat;
 import static social.amoeba.TestSupport.jsonRequestBody;
 import static social.amoeba.TestSupport.xmlRequestBody;
 import static social.amoeba.jeyson.wiremock.request.JSON.parseJSON;
-import static social.amoeba.jeyson.wiremock.request.XML.parseXML;
 
 public class RequestReaderTest {
   @Test
@@ -41,6 +40,14 @@ public class RequestReaderTest {
   public void emptyQueryForNoParams() throws IOException {
     Map actual        = RequestReader.queryParams("file"),
         expected      = parseJSON("{}");
+
+    assertThat(actual, is(expected));
+  }
+
+  @Test
+  public void ignoreBadQueryParams() throws IOException {
+    Map actual        = RequestReader.queryParams("file?param-one=value-one&param-two"),
+        expected      = parseJSON("{'param-one': 'value-one', 'param-two': ''}");
 
     assertThat(actual, is(expected));
   }

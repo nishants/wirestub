@@ -14,8 +14,11 @@ public class RequestReader {
     if(url.contains("?")){
       String[] pairs = url.split("\\?")[1].split("&");
       for(int i = 0 ; i < pairs.length; i++){
-        String[] values = pairs[i].split("=");
-        params.put(values[0], values[1]);
+        String tokens[] = pairs[i].split("="),
+            name = tokens[0],
+            value = tokens.length == 2 ? tokens[1] : "";
+
+        params.put(name, value);
       }
     }
     return params;
