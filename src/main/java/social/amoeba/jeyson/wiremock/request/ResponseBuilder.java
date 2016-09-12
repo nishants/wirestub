@@ -3,15 +3,16 @@ package social.amoeba.jeyson.wiremock.request;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Scanner;
 
 public abstract class ResponseBuilder {
-  public static Map render(
+  public static String render(
       Map scope,
-      File templatesPath) throws IOException {
+      File teplatePath) throws IOException {
 
-    boolean isJSON = templatesPath.getName().toLowerCase().endsWith(".json"),
-            isXML   =templatesPath.getName().toLowerCase().endsWith(".xml");
+    boolean isJSON = teplatePath.getName().toLowerCase().endsWith(".json"),
+            isXML   =teplatePath.getName().toLowerCase().endsWith(".xml");
 
-    return isXML ? XML.parse(templatesPath) : isJSON ? JSON.parse(templatesPath) : null;
+    return new Scanner(teplatePath).useDelimiter("\\Z").next();
   }
 }

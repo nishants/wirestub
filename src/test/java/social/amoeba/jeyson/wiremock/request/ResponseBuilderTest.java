@@ -21,10 +21,10 @@ public class ResponseBuilderTest {
 
     File templateFile = createTempFile(bodyFileName, contents);
 
-    Map scope    = Collections.emptyMap(),
-        actual   = ResponseBuilder.render(scope, templateFile),
-        expected = parseXML("<body><message>hello</message></body>");
+    Map scope    = Collections.emptyMap();
 
+    String actual = ResponseBuilder.render(scope, templateFile),
+        expected = "<body><message>hello</message></body>";
     assertThat(actual, is(expected));
   }
 
@@ -35,9 +35,10 @@ public class ResponseBuilderTest {
 
     File templateFile = createTempFile(bodyFileName, contents);
 
-    Map scope    = Collections.emptyMap(),
-        actual   = ResponseBuilder.render(scope, templateFile),
-        expected = parseJSON("{'body' : {'message' : 'hello'}}");
+    Map scope    = Collections.emptyMap();
+
+    String actual   = ResponseBuilder.render(scope, templateFile),
+           expected = "{'body' : {'message' : 'hello'}}".replaceAll("'", "\"");
 
     assertThat(actual, is(expected));
   }
