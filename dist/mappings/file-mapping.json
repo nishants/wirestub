@@ -6,7 +6,9 @@
       "user_id       = request.body.xpath('some/xpath/id')",
       "user_name     = config.users[user_id]",
       "user_token    = Math.random()",
-      "session.users = {id: user_id, token: user_token}"]
+      "session.users[user_id] = {token: user_token}",
+      "scope.user_id = user_id"
+    ]
   },
   "response": {
     "status": 200,
