@@ -1,4 +1,4 @@
-package social.amoeba.jeyson.wiremock.request;
+package social.amoeba.jeyson.wiremock.response;
 
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;

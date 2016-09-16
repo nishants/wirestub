@@ -9,7 +9,7 @@ import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 
 import social.amoeba.jeyson.Expression;
 import social.amoeba.jeyson.wiremock.request.RequestReader;
-import social.amoeba.jeyson.wiremock.request.ResponseBuilder;
+import social.amoeba.jeyson.wiremock.response.ResponseBuilder;
 
 import java.util.HashMap;
 import java.util.List;

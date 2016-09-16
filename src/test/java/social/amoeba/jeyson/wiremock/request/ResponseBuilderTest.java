@@ -1,6 +1,7 @@
 package social.amoeba.jeyson.wiremock.request;
 
 import org.junit.Test;
+import social.amoeba.jeyson.wiremock.response.ResponseBuilder;
 
 import java.io.*;
 import java.util.Collections;
