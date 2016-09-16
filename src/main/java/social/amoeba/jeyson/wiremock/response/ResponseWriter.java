@@ -11,14 +11,14 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ResponseBuilder {
+public class ResponseWriter {
   private final String templatesHome;
   private final Jeyson jeyson;
 
   private final JSONResponseBuilder jsonResponseBuilder;
   private final XMLResponseBuilder  xmlResponseBuilder;
 
-  public ResponseBuilder(String templatesHome) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
+  public ResponseWriter(String templatesHome) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     this.templatesHome = templatesHome;
     jeyson = new Jeyson(templatesHome);
     jsonResponseBuilder = new JSONResponseBuilder(templatesHome, jeyson);

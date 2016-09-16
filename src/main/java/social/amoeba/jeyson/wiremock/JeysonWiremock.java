@@ -9,7 +9,7 @@ import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 
 import social.amoeba.jeyson.Expression;
 import social.amoeba.jeyson.wiremock.request.RequestReader;
-import social.amoeba.jeyson.wiremock.response.ResponseBuilder;
+import social.amoeba.jeyson.wiremock.response.ResponseWriter;
 
 import javax.script.ScriptException;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class JeysonWiremock extends ResponseDefinitionTransformer {
 
-  private ResponseBuilder responseBuilder;
+  private ResponseWriter responseWriter;
   private final Map session = new HashMap();
   private final Expression expressions = new Expression();
   private Map config = new HashMap<>();
@@ -46,14 +46,14 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
         before(responseDefinition, scope);
 
-        if (responseBuilder == null) {
-          responseBuilder = new ResponseBuilder(templatesHome);
+        if (responseWriter == null) {
+          responseWriter = new ResponseWriter(templatesHome);
         }
 
-        byte[] responseBody = responseBuilder.render(scope, templatePath);
+        byte[] responseBody = responseWriter.render(scope, templatePath);
 
         builder = builder.withBody(responseBody);
-        builder = builder.withHeaders(responseBuilder.header(templatePath));
+        builder = builder.withHeaders(responseWriter.header(templatePath));
       } catch (Exception e) {
         String errorMessage = "************* Jeyson Error *******************" + System.getProperty("line.separator");
         errorMessage += e.getMessage() + System.getProperty("line.separator");

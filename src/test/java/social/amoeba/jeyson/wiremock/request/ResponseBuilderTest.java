@@ -1,7 +1,7 @@
 package social.amoeba.jeyson.wiremock.request;
 
 import org.junit.Test;
-import social.amoeba.jeyson.wiremock.response.ResponseBuilder;
+import social.amoeba.jeyson.wiremock.response.ResponseWriter;
 
 import java.io.*;
 import java.util.Collections;
@@ -19,7 +19,7 @@ public class ResponseBuilderTest {
            contents     = "<body><message>hello</message></body>";
 
     File templateFile = createTempFile(bodyFileName, contents);
-    ResponseBuilder builder = new ResponseBuilder(templateFile.getParent());
+    ResponseWriter builder = new ResponseWriter(templateFile.getParent());
 
     Map scope    = Collections.emptyMap();
 
@@ -36,7 +36,7 @@ public class ResponseBuilderTest {
     File templateFile = createTempFile(bodyFileName, contents);
 
     Map scope    = Collections.emptyMap();
-    ResponseBuilder builder = new ResponseBuilder(templateFile.getParent());
+    ResponseWriter builder = new ResponseWriter(templateFile.getParent());
 
     String actual   = new String(builder.readTemplate(templateFile)),
            expected = "{'body' : {'message' : 'hello'}}".replaceAll("'", "\"");
