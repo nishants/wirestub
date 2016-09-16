@@ -1,20 +1,10 @@
 {
   "request" : {
     "method": "PUT",
-    "url"   : "/file",
-    "before":[
-      "user_id       = request.body.xpath('some/xpath/id')",
-      "user_name     = config.users[user_id]",
-      "user_token    = Math.random()",
-      "session.users[user_id] = {token: user_token}",
-      "scope.user_id = user_id"
-    ]
+    "url"   : "/file"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "nested/file-response.json",
-    "transformerParameters" : {
-      "controller" : "createUserController"
-    }
+    "bodyFileName": "nested/file-response.json"
   }
 }

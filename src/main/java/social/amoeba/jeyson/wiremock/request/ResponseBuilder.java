@@ -2,6 +2,7 @@ package social.amoeba.jeyson.wiremock.request;
 
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
+import social.amoeba.jeyson.Expression;
 import social.amoeba.jeyson.Jeyson;
 import social.amoeba.jeyson.Json;
 
@@ -15,6 +16,8 @@ import java.util.Scanner;
 public class ResponseBuilder {
   private final String templatesHome;
   private final Jeyson jeyson;
+  private final Expression expressions = new Expression();
+
 
   public ResponseBuilder(String templatesHome) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     this.templatesHome = templatesHome;
