@@ -1,6 +1,7 @@
 package social.amoeba.jeyson.wiremock.request;
 
 import org.junit.Test;
+import social.amoeba.jeyson.wiremock.request.XMLRequest.XMLRequestBody;
 
 import java.io.IOException;
 import java.util.Map;
@@ -29,11 +30,10 @@ public class RequestReaderTest {
 
 //  @Test
 //  public void xpathForXmlRequests() throws IOException {
-//    XMLMap xmlMap       = (XMLMap)(RequestReader.read(xmlRequestBody("<body><message>hello</message></body>")).get("body"));
-//    Map actual        = xmlMap,
-//        expected      = parseJSON("{'headers': {'Content-Type' : ['application/xml']}, 'body' : {'body' : {'message' : 'hello'}}, 'cookies' : {}, 'query':{}}");
+//    XMLRequestBody xmlRequestBody       = (XMLRequestBody)(RequestReader.read(xmlRequestBody("<body><message>hello</message></body>")).get("body"));
+//    Map expected      = parseJSON("{}");
 //
-//    assertThat(xmlMap.xpath("//message[text() = 'hello']"), is(expected));
+//    assertThat(xmlRequestBody.xpath("//message[text() = 'hello']"), is(expected));
 //  }
 
   @Test
