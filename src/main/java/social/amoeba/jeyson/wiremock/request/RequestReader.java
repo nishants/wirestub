@@ -30,7 +30,7 @@ public class RequestReader {
 
     Map body = isJSON ? JSON.parse(request.getBody()) : isXML ? XML.parse(request.getBody()) : null,
         headers = new HashMap<>(),
-        result = new HashMap<>(),
+        result  = isXML ? new XMLMap() : new HashMap<>(),
         cookies = new HashMap<>();
 
     Iterator<HttpHeader> iterator = request.getHeaders().all().iterator();

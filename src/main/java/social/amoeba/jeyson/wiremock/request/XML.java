@@ -11,7 +11,7 @@ public class XML {
   private static final XmlMapper xmlMapper = new XmlMapper();
 
   public static Map parse(byte[] body) throws IOException {
-    return xmlMapper.readValue(String.format("<wrapper>%s</wrapper>", new String(body)), Map.class);
+    return new XMLMap(xmlMapper.readValue(String.format("<wrapper>%s</wrapper>", new String(body)), Map.class));
   }
 
   public static Map parseXML(String string) throws IOException {
