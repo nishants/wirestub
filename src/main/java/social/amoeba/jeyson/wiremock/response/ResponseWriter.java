@@ -28,7 +28,7 @@ public class ResponseWriter {
   public ResponseDefinitionBuilder writeTo(ResponseDefinitionBuilder builder, Map scope, String templatePath) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     File file = new File(templatesHome, templatePath);
     boolean isJSON = file.getName().toLowerCase().endsWith(".json"),
-        isXML   =file.getName().toLowerCase().endsWith(".xml");
+            isXML  = file.getName().toLowerCase().endsWith(".xml");
 
     byte[] body = isJSON ? jsonResponseBuilder.render(scope, templatePath)  : isXML ? xmlResponseBuilder.render(scope, templatePath) : null;
 
