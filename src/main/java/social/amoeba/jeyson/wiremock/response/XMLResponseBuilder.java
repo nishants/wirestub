@@ -30,12 +30,4 @@ public class XMLResponseBuilder {
     return readTemplate(new File(templatesHome, relativePath));
   }
 
-  public HttpHeaders header(String templatePath) {
-    boolean isJSON = templatePath.toLowerCase().endsWith(".json"),
-            isXML  = templatePath.toLowerCase().endsWith(".xml");
-
-    String mime = isJSON ? "application/json" : isXML ? "application/xml" : null;
-
-    return new HttpHeaders(new HttpHeader[]{new HttpHeader("Content-Type", mime),});
-  }
 }
