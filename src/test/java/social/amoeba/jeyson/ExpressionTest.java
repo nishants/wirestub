@@ -20,4 +20,17 @@ public class ExpressionTest {
     assertThat(actual, is("hello world !"));
   }
 
+  @Test
+  public void shouldUpdateScopeFromExpressions() throws ScriptException, IOException, URISyntaxException, NoSuchMethodException {
+    HashMap<Object, Object> scope = new HashMap<>();
+    scope.put("messages", new HashMap<>());
+    new Expression().eval("messages['hello'] = 'world !'", scope);
+
+    Object result = map(map(scope.get("messages"))).get("hello");
+    assertThat(result, is("world !"));
+  }
+
+  private static HashMap map(Object obj){
+    return (HashMap)obj;
+  }
 }
