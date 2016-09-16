@@ -28,7 +28,9 @@ public class RequestReader {
     boolean isJSON = mimeType.equalsIgnoreCase("application/json"),
             isXML  = mimeType.equalsIgnoreCase("application/xml") || mimeType.equalsIgnoreCase("text/xml");
 
-    Map body = isJSON ? JSON.parse(request.getBody()) : isXML ? XML.parse(request.getBody()) : null,
+    byte[] requestBody = request.getBody();
+
+    Map body = isJSON ? JSON.parse(requestBody) : isXML ? XML.parse(requestBody) : null,
         headers = new HashMap<>(),
         result  = isXML ? new XMLMap() : new HashMap<>(),
         cookies = new HashMap<>();
@@ -38,6 +40,10 @@ public class RequestReader {
       HttpHeader next = iterator.next();
       headers.put(next.key(), next.values());
     }
+    if(isXML){
+      return new XMLRequest(request);
+    }
+
 
     result.put("body"   , body);
     result.put("headers", headers);

@@ -28,6 +28,15 @@ public class RequestReaderTest {
     assertThat(actual, is(expected));
   }
 
+//  @Test
+//  public void xpathForXmlRequests() throws IOException {
+//    XMLMap xmlMap       = (XMLMap)(RequestReader.read(xmlRequestBody("<body><message>hello</message></body>")).get("body"));
+//    Map actual        = xmlMap,
+//        expected      = parseJSON("{'headers': {'Content-Type' : ['application/xml']}, 'body' : {'body' : {'message' : 'hello'}}, 'cookies' : {}, 'query':{}}");
+//
+//    assertThat(xmlMap.xpath("//message[text() = 'hello']"), is(expected));
+//  }
+
   @Test
   public void parseRequestQuery() throws IOException {
     Map actual        = RequestReader.queryParams("file?param-one=value-one&param-two=value-two"),
