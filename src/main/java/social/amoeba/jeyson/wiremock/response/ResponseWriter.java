@@ -1,5 +1,6 @@
 package social.amoeba.jeyson.wiremock.response;
 
+import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
 import social.amoeba.jeyson.Jeyson;
@@ -45,5 +46,11 @@ public class ResponseWriter {
     String mime = isJSON ? "application/json" : isXML ? "application/xml" : null;
 
     return new HttpHeaders(new HttpHeader[]{new HttpHeader("Content-Type", mime),});
+  }
+
+  public ResponseDefinitionBuilder writeTo(ResponseDefinitionBuilder builder, Map scope, String templatePath) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
+    builder = builder.withBody(render(scope, templatePath));
+    builder = builder.withHeaders(header(templatePath));
+    return builder;
   }
 }
