@@ -8,7 +8,7 @@
     "bodyFileName": "nested/xpath.xml",
     "transformerParameters" : {
       "before": [
-        "message = request.body.xpath('//message')"
+        "scope.message = request.body.xpath('//message')"
       ]
     }
   }

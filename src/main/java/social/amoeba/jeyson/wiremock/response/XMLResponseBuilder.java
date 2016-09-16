@@ -15,7 +15,7 @@ public class XMLResponseBuilder {
   private final String templatesHome;
   private final Jeyson jeyson;
 
-  private static final String EXPRESSION_REGEX = "\\{\\{(.+)\\}\\}";
+  private static final String EXPRESSION_REGEX = "\\{\\{([^\\}]+)\\}\\}";
 
   public XMLResponseBuilder(String templatesHome, Jeyson jeyson) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     this.templatesHome = templatesHome;
