@@ -1,7 +1,12 @@
 {
-  "request": {
+  "request" : {
     "method": "PUT",
-    "url": "/file"
+    "url"   : "/file",
+    "before":[
+      "user_id       = request.body.xpath('some/xpath/id')",
+      "user_name     = config.users[user_id]",
+      "user_token    = Math.random()",
+      "session.users = {id: user_id, token: user_token}"]
   },
   "response": {
     "status": 200,
