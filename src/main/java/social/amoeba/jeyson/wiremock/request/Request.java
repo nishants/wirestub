@@ -7,6 +7,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Request extends HashMap{
+  protected Request(com.github.tomakehurst.wiremock.http.Request request){
+    put("headers",  headers(request));
+    put("cookies",  request.getCookies());
+    put("query",    queryParams(request.getUrl()));
+  }
   protected static Map queryParams(String url){
     HashMap params = new HashMap<>();
     if(url.contains("?")){

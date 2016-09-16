@@ -45,12 +45,7 @@ public class RequestReader {
     }
 
 
-    result.put("body"   , body);
-    result.put("headers", headers);
-    result.put("cookies", request.getCookies());
-    result.put("query", queryParams(request.getUrl()));
-
-    return result;
+    return new JSONRequest(request);
   }
 
 }
