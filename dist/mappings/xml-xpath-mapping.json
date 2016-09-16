@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "PUT",
+    "url": "/xml-path"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "nested/xpath.xml",
+    "transformerParameters" : {
+      "before": [
+        "message = request.body.xpath('//message')"
+      ]
+    }
+  }
+}

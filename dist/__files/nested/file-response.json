@@ -1,5 +1,4 @@
 {
-  "status": 200,
   "body" : {
     "message"   : "hello",
     "request"   : "{{request.body.names.split(',')}}",
@@ -8,7 +7,6 @@
     "sum"       : "{{0 + 1 }}",
     "nil"       : "{{null}}",
     "boolean"   : "{{1 == 2}}",
-    "session"   : "{{session.users[user_id]}}",
     "list"      : "{{ 'one,two,three,four,five'.split(',') }}",
     "repeater"  : {
       "@repeat" : "name in ['one', 'two', 'three']",

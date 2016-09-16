@@ -1,0 +1,21 @@
+{
+  "request" : {
+    "method": "PUT",
+    "url"   : "/set-session"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "nested/set-session.json",
+    "transformerParameters" : {
+      "before":[
+        "session['users'] = {}",
+        "config['users']  = {}",
+        "user_id          = request.body.user.id",
+        "user_name        = config.users[user_id]",
+        "user_token       = Math.random()",
+        "session.users[user_id] = {token: user_token}",
+        "scope.user_id = user_id"
+      ]
+    }
+  }
+}
