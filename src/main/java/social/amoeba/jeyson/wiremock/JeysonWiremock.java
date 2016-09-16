@@ -11,6 +11,9 @@ import social.amoeba.jeyson.Expression;
 import social.amoeba.jeyson.wiremock.request.RequestReader;
 import social.amoeba.jeyson.wiremock.response.ResponseBuilder;
 
+import javax.script.ScriptException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,11 +44,7 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
         scope.put("session", session);
         scope.put("config" , new HashMap(config));
 
-        Parameters transformers = responseDefinition.getTransformerParameters();
-        if(transformers != null && transformers.get("before") != null){
-          String[] beforeBlock = ((List<String>) responseDefinition.getTransformerParameters().get("before")).toArray(new String[0]);
-          expressions.eval(beforeBlock, scope);
-        }
+        before(responseDefinition, scope);
 
         if (responseBuilder == null) {
           responseBuilder = new ResponseBuilder(templatesHome);
@@ -64,6 +63,14 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
     }
 
     return builder.build();
+  }
+
+  private void before(ResponseDefinition responseDefinition, Map scope) throws URISyntaxException, NoSuchMethodException, IOException, ScriptException {
+    Parameters transformers = responseDefinition.getTransformerParameters();
+    if(transformers != null && transformers.get("before") != null){
+      String[] beforeBlock = ((List<String>) responseDefinition.getTransformerParameters().get("before")).toArray(new String[0]);
+      expressions.eval(beforeBlock, scope);
+    }
   }
 
 

@@ -3,6 +3,7 @@ package social.amoeba.jeyson.wiremock.response;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
 import social.amoeba.jeyson.Jeyson;
+import social.amoeba.jeyson.Json;
 
 import javax.script.ScriptException;
 import java.io.File;
@@ -11,30 +12,27 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ResponseBuilder {
+public class JSONResponseBuilder {
   private final String templatesHome;
   private final Jeyson jeyson;
-  private final JSONResponseBuilder jsonResponseBuilder;
 
-  public ResponseBuilder(String templatesHome) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
+  public JSONResponseBuilder(String templatesHome, Jeyson jeyson) throws IOException, ScriptException, NoSuchMethodException {
     this.templatesHome = templatesHome;
-    jeyson = new Jeyson(templatesHome);
-    jsonResponseBuilder = new JSONResponseBuilder(templatesHome, jeyson);
+    this.jeyson = jeyson;
   }
 
-  public byte[] readTemplate(
-      File file) throws IOException {
+  protected static byte[] readTemplate(File file) throws IOException {
     return new Scanner(file).useDelimiter("\\Z").next().getBytes();
   }
 
-  public byte[] render(Map scope, String relativePath) throws IOException, ScriptException, NoSuchMethodException, URISyntaxException {
+  public byte[] render(Map scope, String relativePath) throws IOException, ScriptException, NoSuchMethodException {
     File file = new File(templatesHome, relativePath);
     boolean isJSON = file.getName().toLowerCase().endsWith(".json"),
             isXML   =file.getName().toLowerCase().endsWith(".xml");
 
     byte[] template = readTemplate(file);
 
-    return isJSON ? jsonResponseBuilder.render(scope, relativePath)  : template;
+    return isJSON ? Json.stringify(jeyson.compile(scope, new String(template))).getBytes()  : template;
   }
 
   public HttpHeaders header(String templatePath) {
