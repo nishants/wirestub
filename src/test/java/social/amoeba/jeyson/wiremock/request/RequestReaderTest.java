@@ -7,8 +7,7 @@ import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static social.amoeba.TestSupport.jsonRequestBody;
-import static social.amoeba.TestSupport.xmlRequestBody;
+import static social.amoeba.TestSupport.*;
 import static social.amoeba.jeyson.wiremock.request.JSON.parseJSON;
 
 public class RequestReaderTest {
@@ -38,16 +37,31 @@ public class RequestReaderTest {
 //  }
 
   @Test
-  public void parseRequestQuery() throws IOException {
-    Map actual        = RequestReader.queryParams("file?param-one=value-one&param-two=value-two"),
+  public void parseRequestQueryForJson() throws IOException {
+    com.github.tomakehurst.wiremock.http.Request request = jsonRequestBody("{}");
+    setURl(request, "file?param-one=value-one&param-two=value-two");
+    Map actual        = toMap(RequestReader.read(request).get("query")),
+        expected      = parseJSON("{'param-one': 'value-one', 'param-two': 'value-two'}");
+
+    assertThat(actual, is(expected));
+  }
+  @Test
+  public void parseRequestQueryForXml() throws IOException {
+    com.github.tomakehurst.wiremock.http.Request request = xmlRequestBody("<hello></hello>");
+    setURl(request, "file?param-one=value-one&param-two=value-two");
+    Map actual        = toMap(RequestReader.read(request).get("query")),
         expected      = parseJSON("{'param-one': 'value-one', 'param-two': 'value-two'}");
 
     assertThat(actual, is(expected));
   }
 
+
   @Test
   public void emptyQueryForNoParams() throws IOException {
-    Map actual        = RequestReader.queryParams("file"),
+    com.github.tomakehurst.wiremock.http.Request request = jsonRequestBody("{}");
+    setURl(request, "file");
+
+    Map actual        = toMap(RequestReader.read(request).get("query")),
         expected      = parseJSON("{}");
 
     assertThat(actual, is(expected));
@@ -55,7 +69,10 @@ public class RequestReaderTest {
 
   @Test
   public void ignoreBadQueryParams() throws IOException {
-    Map actual        = RequestReader.queryParams("file?param-one=value-one&param-two"),
+    com.github.tomakehurst.wiremock.http.Request request = jsonRequestBody("{}");
+    setURl(request, "file?param-one=value-one&param-two");
+
+    Map actual        = toMap(RequestReader.read(request).get("query")),
         expected      = parseJSON("{'param-one': 'value-one', 'param-two': ''}");
 
     assertThat(actual, is(expected));

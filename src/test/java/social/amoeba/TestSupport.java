@@ -78,6 +78,14 @@ public class TestSupport {
     return mocked;
   }
 
+  public static void setURl(Request request ,String url){
+    when(request.getUrl()).thenReturn(url);
+  }
+
+  public static Map toMap(Object arg){
+    return (Map)arg;
+  }
+
   private static HttpHeaders headers(String mime){
     return new HttpHeaders(new HttpHeader[]{new HttpHeader("Content-Type", mime),});
   }
