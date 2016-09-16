@@ -34,16 +34,10 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
 
     if (templatePath != null) {
       try {
-        Map config = new HashMap(this.config),
-            scope = new ResponseScope(session, config, RequestReader.read(request));
-
-        if (responseWriter == null) {
-          responseWriter = new ResponseWriter(files.getPath());
-        }
-
+        Map scope = new ResponseScope(session, new HashMap(this.config), RequestReader.read(request));
+        responseWriter = responseWriter == null ? new ResponseWriter(files.getPath()) : responseWriter;
         new BeforeBlock().run(responseDefinition, scope);
         responseWriter.writeTo(builder, scope, templatePath);
-
       } catch (Exception e) {
         String errorMessage = "************* Jeyson Error *******************" + System.getProperty("line.separator");
         errorMessage += e.getMessage() + System.getProperty("line.separator");
