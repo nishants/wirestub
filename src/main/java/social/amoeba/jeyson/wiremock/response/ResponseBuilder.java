@@ -14,12 +14,15 @@ import java.util.Scanner;
 public class ResponseBuilder {
   private final String templatesHome;
   private final Jeyson jeyson;
+
   private final JSONResponseBuilder jsonResponseBuilder;
+  private final XMLResponseBuilder  xmlResponseBuilder;
 
   public ResponseBuilder(String templatesHome) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     this.templatesHome = templatesHome;
     jeyson = new Jeyson(templatesHome);
     jsonResponseBuilder = new JSONResponseBuilder(templatesHome, jeyson);
+    xmlResponseBuilder = new XMLResponseBuilder(templatesHome, jeyson);
   }
 
   public byte[] readTemplate(
@@ -32,9 +35,7 @@ public class ResponseBuilder {
     boolean isJSON = file.getName().toLowerCase().endsWith(".json"),
             isXML   =file.getName().toLowerCase().endsWith(".xml");
 
-    byte[] template = readTemplate(file);
-
-    return isJSON ? jsonResponseBuilder.render(scope, relativePath)  : template;
+    return isJSON ? jsonResponseBuilder.render(scope, relativePath)  : isXML ? xmlResponseBuilder.render(scope, relativePath) : null;
   }
 
   public HttpHeaders header(String templatePath) {

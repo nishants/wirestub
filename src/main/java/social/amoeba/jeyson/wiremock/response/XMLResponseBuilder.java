@@ -12,23 +12,22 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class JSONResponseBuilder {
+public class XMLResponseBuilder {
   private final String templatesHome;
   private final Jeyson jeyson;
 
-  public JSONResponseBuilder(String templatesHome, Jeyson jeyson) throws IOException, ScriptException, NoSuchMethodException {
+  public XMLResponseBuilder(String templatesHome, Jeyson jeyson) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     this.templatesHome = templatesHome;
-    this.jeyson = jeyson;
+    this.jeyson = new Jeyson(templatesHome);
   }
 
-  protected static byte[] readTemplate(File file) throws IOException {
+  public byte[] readTemplate(
+      File file) throws IOException {
     return new Scanner(file).useDelimiter("\\Z").next().getBytes();
   }
 
   public byte[] render(Map scope, String relativePath) throws IOException, ScriptException, NoSuchMethodException {
-    byte[] template = readTemplate(new File(templatesHome, relativePath));
-    Map compiled = jeyson.compile(scope, new String(template));
-    return Json.stringify(compiled).getBytes();
+    return readTemplate(new File(templatesHome, relativePath));
   }
 
   public HttpHeaders header(String templatePath) {
