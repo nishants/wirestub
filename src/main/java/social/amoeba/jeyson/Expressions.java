@@ -6,15 +6,12 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 
-public class JSFile {
+public class Expressions {
   private final Invocable scriptEnginge;
 
-  public JSFile(String code) throws IOException, ScriptException, URISyntaxException {
+  public Expressions(String code) throws IOException, ScriptException, URISyntaxException {
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
     engine.eval(code);
     this.scriptEnginge = (Invocable) engine;
