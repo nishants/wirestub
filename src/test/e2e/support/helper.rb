@@ -31,7 +31,7 @@ module Jeyson
     end
 
     def stop_server
-      @server.stop
+      # @server.stop
     end
   end
 end
