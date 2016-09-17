@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/hello"
+    "url": "/from-body"
   },
   "response": {
     "status": 200,
