@@ -1,9 +1,6 @@
 package social.amoeba;
 
-import com.github.tomakehurst.wiremock.http.HttpHeader;
-import com.github.tomakehurst.wiremock.http.HttpHeaders;
-import com.github.tomakehurst.wiremock.http.Request;
-import com.github.tomakehurst.wiremock.http.ResponseDefinition;
+import com.github.tomakehurst.wiremock.http.*;
 import wiremock.com.fasterxml.jackson.core.JsonProcessingException;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,7 +11,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -70,12 +66,18 @@ public class TestSupport {
   }
 
   private static Request createRequest(String mime,String body){
-    Request mocked = mock(Request.class);
+    Request request = mock(Request.class);
 
-    when(mocked.getHeaders()).thenReturn(headers(mime));
-    when(mocked.getUrl()).thenReturn("/some/fome/abs");
-    when(mocked.getBody()).thenReturn(body.replaceAll("'", "\"").getBytes());
-    return mocked;
+
+    RequestMethod method = mock(RequestMethod.class);
+
+    when(method.getName()).thenReturn("PUT");
+    when(request.getMethod()).thenReturn(method);
+
+    when(request.getHeaders()).thenReturn(headers(mime));
+    when(request.getUrl()).thenReturn("/some/fome/abs");
+    when(request.getBody()).thenReturn(body.replaceAll("'", "\"").getBytes());
+    return request;
   }
 
   public static void setURl(Request request ,String url){
