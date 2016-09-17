@@ -1,0 +1,3 @@
+{
+  "session-found"   : "{{session.users[user_id]}}"
+}

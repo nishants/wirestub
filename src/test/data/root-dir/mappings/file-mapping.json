@@ -1,0 +1,10 @@
+{
+  "request" : {
+    "method": "GET",
+    "url"   : "/file"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "nested/file-response.json"
+  }
+}
