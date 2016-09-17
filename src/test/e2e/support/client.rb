@@ -1,27 +1,22 @@
-require 'net/http' # URI is required by Net::HTTP by default
+require 'http' # URI is required by Net::HTTP by default
+require 'json' # URI is required by Net::HTTP by default
 
 module Jeyson
   class Client
-    def initialize(root, default_headers = {})
+    def initialize(root, port, default_headers = {})
       @root     = root
+      @port     = port
       @headers  = default_headers
       @remote   = Net::HTTP.new("http://localhost",5132)
     end
 
     def get(request_url, headers = {'Content-Type' => "application/json"})
-      JSON.parse(Net::HTTP.get(url(request_url)))
+      response = HTTP.headers({'Content-Type' => "application/json"}).get(url(request_url))
+      JSON.parse(response.body.to_s)
     end
 
     def url(url)
-      URI "#{@root}#{url}"
-    end
-
-    def put(request_url, body, headers = {'Content-Type' => "application/json"})
-      @remote.send_request('PUT', request_url)
-    end
-
-    def url(url)
-      URI "#{@root}#{url}"
+      "#{@root}#{url}"
     end
 
   end

@@ -7,7 +7,7 @@ module Jeyson
     end
 
     def root_dir
-      File.expand "src/test/data/root-dir"
+      File.expand_path "src/test/data/root-dir"
     end
 
     def port

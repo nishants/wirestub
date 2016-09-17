@@ -1,7 +1,5 @@
-require 'json'
 require './src/test/e2e/support/helper'
 require './src/test/e2e/support/client'
-require 'net/http'
 
 RSpec.describe "jeyson-java" do
 
@@ -9,7 +7,7 @@ RSpec.describe "jeyson-java" do
 
     before(:all) do
       @helper = Jeyson::TestHelper.new
-      @client = Jeyson::Client.new(@helper.stub_root_url)
+      @client = Jeyson::Client.new(@helper.stub_root_url, @helper.port)
       @helper.start_server
     end
 
@@ -22,6 +20,12 @@ RSpec.describe "jeyson-java" do
       actual    = @client.get("/hello")
       expect(actual).to eq(expected)
     end
+
+    # it "Should parse expressoins in json templeates" do
+    #   expected  = {"message" => "hello"}
+    #   actual    = @client.put("/expressions", {"names" => "one, two, three"})
+    #   expect(actual).to eq(expected)
+    # end
 
   end
 end
