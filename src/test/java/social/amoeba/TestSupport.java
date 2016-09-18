@@ -24,6 +24,10 @@ public class TestSupport {
     return Paths.get(this.getClass().getResource(path).toURI()).toAbsolutePath().toString();
   }
 
+  public static String jarRooot() {
+    return Paths.get("").toAbsolutePath().toString();
+  }
+
   public static class Spec{
     public void setTemplate(Map template) throws JsonProcessingException {
       this.template = new ObjectMapper().writeValueAsString(template);
