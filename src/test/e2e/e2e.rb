@@ -7,7 +7,7 @@ RSpec.describe "jeyson-java" do
 
     before(:all) do
       @helper = Jeyson::TestHelper.new
-      @client = Jeyson::Client.new(@helper.stub_root_url, @helper.port)
+      @client = Jeyson::Client.new(@helper.stub_root_url)
       @helper.start_server
     end
 

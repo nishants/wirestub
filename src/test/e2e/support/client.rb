@@ -3,9 +3,8 @@ require 'json' # URI is required by Net::HTTP by default
 
 module Jeyson
   class Client
-    def initialize(root, port, default_headers = {'Content-Type' => "application/json"})
+    def initialize(root, default_headers = {'Content-Type' => "application/json"})
       @root     = root
-      @port     = port
       @headers  = default_headers
     end
 
