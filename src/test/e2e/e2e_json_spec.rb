@@ -21,7 +21,13 @@ RSpec.describe "jeyson-java" do
       expect(actual).to eq(expected)
     end
 
-    it "Should parse expressoins in json templeates" do
+    it "should support request param query" do
+      expected =  JSON.parse('{"data":{"queries":{"time":"now", "message":"hi"}}}')
+      actual    = @client.get("/query?time=now&message=hi")
+      expect(actual).to eq(expected)
+    end
+
+    it "Should parse expressions in json templeates" do
       expected =  {"body"=>{"message"=>"hello","request"=>["one"," two"," three"],"headers"=>["application/json"],"float"=>1.1,"sum"=>1,"nil"=>nil,"boolean"=>false,"list"=>["one","two","three","four","five"],"repeater"=>[{"id"=>"1-one"},{"id"=>"2-two"},{"id"=>"3-three"}]}}
       actual    = @client.put("/expressions", {"names" => "one, two, three"})
       expect(actual).to eq(expected)

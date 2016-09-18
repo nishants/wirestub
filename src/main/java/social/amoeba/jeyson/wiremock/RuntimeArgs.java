@@ -16,7 +16,7 @@ public class RuntimeArgs {
 
     if(params.indexOf("--root-dir") < 0){
       params.add("--root-dir");
-      params.add(new File(RuntimeArgs.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getAbsolutePath());
+      params.add(new File(RuntimeArgs.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getAbsolutePath());
     }
 
     return params.toArray(new String[0]);

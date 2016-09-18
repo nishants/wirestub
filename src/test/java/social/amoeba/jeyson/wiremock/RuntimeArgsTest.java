@@ -15,7 +15,7 @@ public class RuntimeArgsTest {
   @Test
   public void shouldAddRootDirIfNotProvided() throws InterruptedException, NoSuchMethodException, ScriptException, IOException, URISyntaxException {
     String[] args     = {"--verbose","--port", "5123"},
-             expected = {"--verbose", "--port", "5123", "--extensions", "social.amoeba.jeyson.wiremock.JeysonWiremock", "--root-dir", TestSupport.jarRooot() +"/target"},
+             expected = {"--verbose", "--port", "5123", "--extensions", "social.amoeba.jeyson.wiremock.JeysonWiremock", "--root-dir", TestSupport.jarRooot()},
              actual   = RuntimeArgs.set(args);
 
     assertThat(actual, is(expected));

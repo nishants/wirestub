@@ -11,7 +11,7 @@ public class RequestReader {
 
   public static Map read(Request request) throws IOException {
     if(request.getMethod().getName().equals("GET")){
-      return new HashMap<>();
+      return new social.amoeba.jeyson.wiremock.request.Request(request);
     }
     ContentTypeHeader contentType = request.getHeaders().getContentTypeHeader();
     String mimeType = contentType == null ? null : contentType.mimeTypePart();

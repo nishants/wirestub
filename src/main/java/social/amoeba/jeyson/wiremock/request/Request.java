@@ -11,7 +11,9 @@ public class Request extends HashMap{
     put("headers",  headers(request));
     put("cookies",  request.getCookies());
     put("query",    queryParams(request.getUrl()));
+    put("body",     new HashMap());
   }
+
   protected static Map queryParams(String url){
     HashMap params = new HashMap<>();
     if(url.contains("?")){
