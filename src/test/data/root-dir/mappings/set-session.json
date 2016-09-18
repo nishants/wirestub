@@ -1,0 +1,15 @@
+{
+  "request" : {
+    "method": "PUT",
+    "url"   : "/set-session"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "session.json",
+    "transformerParameters" : {
+      "before":[
+        "session.current_user    = request.body.userId"
+      ]
+    }
+  }
+}

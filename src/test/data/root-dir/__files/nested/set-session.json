@@ -1,3 +1,0 @@
-{
-  "session-created"   : "{{session.users[request.body.user.id]}}"
-}

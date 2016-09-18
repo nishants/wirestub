@@ -1,10 +1,10 @@
 {
   "request" : {
-    "method": "PUT",
+    "method": "GET",
     "url"   : "/get-session"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "nested/set-session.json"
+    "bodyFileName": "session.json"
   }
 }

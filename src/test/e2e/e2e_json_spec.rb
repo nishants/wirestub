@@ -27,5 +27,19 @@ RSpec.describe "jeyson-java" do
       expect(actual).to eq(expected)
     end
 
+    it "Should set session values in before block" do
+      session = @client.get("/get-session")
+      expect(session["user"]["id"]).to eq(nil)
+
+      @client.put("/set-session", {"userId" => "session-user-id"})
+      session = @client.get("/get-session")
+      expect(session["user"]["id"]).to eq("session-user-id")
+
+
+      @client.put("/set-session", {"userId" => "updated-session-user-id"})
+      session = @client.get("/get-session")
+      expect(session["user"]["id"]).to eq("updated-session-user-id")
+    end
+
   end
 end
