@@ -5,11 +5,11 @@ module Jeyson
   class TestHelper
 
     def initialize
-      @path_to_jar    = File.expand_path "./"
+      @path_to_jar    = File.expand_path("./")
       @jar_file_name  = "jeyson-1.0-SNAPSHOT-jar-with-dependencies.jar"
-      @root_dir       = File.expand_path "src/test/data/root-dir"
+      @root_dir       = File.expand_path("./src/test/data/root-dir")
       @port           = 5133
-      @server_log     = File.expand_path "server.log"
+      @server_log     = File.expand_path("./server.log")
       @server_timeout = 5
     end
 
