@@ -5,6 +5,6 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "nested/hello.json"
+    "bodyFileName": "hello.json"
   }
 }
