@@ -1,9 +1,13 @@
-require 'service_mock'
+require 'childprocess'
 
 module Jeyson
   class TestHelper
     def path_to_jar
-      "/Users/dawn/Documents/projects/wiremock/wiremock-standalone-2.1.12"
+      File.expand_path "./"
+    end
+
+    def jar_file_name
+      "jeyson-1.0-SNAPSHOT-jar-with-dependencies.jar"
     end
 
     def root_dir
@@ -11,27 +15,43 @@ module Jeyson
     end
 
     def port
-      5132
+      5133
     end
+
+    def server_log
+      File.expand_path "server.log"
+    end
+
 
     def stub_root_url()
       "http://localhost:#{port}"
     end
 
     def start_server
-      @server = ServiceMock::Server.new(path_to_jar)
-      @server.start do |server|
-        server.port             = port
-        server.root_dir         = root_dir
-        server.verbose          = true
-        server.record_mappings  = false
-        server.wait_for_process = true
-        server.inherit_io       = false
-      end
+      @process = ChildProcess.build("java", "-jar", jar_file_name, "--port", port.to_s, "--verbose", "--root-dir", root_dir)
+      @process.cwd = path_to_jar
+      # @process.io.inherit!
+
+      out = File.new(server_log, 'r+')
+      @process.io.stdout = @process.io.stderr = out
+      out.sync = true
+
+      @process.duplex    = true # sets up pipe so process.io.stdin will be available after .start
+
+      @process.leader = false
+      @process.detach = true
+
+      @process.start
+      sleep 3
+      # @process.wait
     end
 
     def stop_server
-      # @server.stop
+      begin
+        @process.poll_for_exit(10)
+      rescue ChildProcess::TimeoutError
+        @process.stop # tries increasingly harsher methods to kill the process.
+      end
     end
   end
 end

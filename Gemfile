@@ -1,8 +1,8 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'rspec'
+gem "rspec"
 gem "json"
-gem 'service_mock'
-gem 'rake'
+gem "rake"
 gem "http"
+gem "childprocess", "~>0.5"
 
