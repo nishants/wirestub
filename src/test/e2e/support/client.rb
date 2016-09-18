@@ -7,7 +7,6 @@ module Jeyson
       @root     = root
       @port     = port
       @headers  = default_headers
-      @remote   = Net::HTTP.new("http://localhost",5132)
     end
 
     def get(request_url, request_headers = {})
