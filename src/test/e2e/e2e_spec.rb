@@ -17,11 +17,12 @@ RSpec.describe "jeyson-java" do
 
     it "Should serve a plain json" do
       expect(@client.get("/hello")).to  eq(@helper.read("expected/hello.json"))
-      expect(@client.get("/xml/hello")).to eq(@helper.read("expected/hello.xml"))
+      expect(@client.get("/xml/hello")).to eq(@helper.read("expected/xml/hello.xml"))
     end
 
     it "should support request param query" do
       expect(@client.get("/query?time=now&message=hi")).to eq(@helper.read("expected/query.json"))
+      expect(@client.get("/xml/query?time=now&message=hi")).to eq(@helper.read("expected/xml/query.xml"))
     end
 
     it "Should parse expressions in json templeates" do

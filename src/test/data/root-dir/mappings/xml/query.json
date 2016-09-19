@@ -1,10 +1,10 @@
 {
   "request": {
     "method": "GET",
-    "url": "/from-body"
+    "urlPattern": "/xml/query?.*"
   },
   "response": {
     "status": 200,
-    "body" : "this is from a body"
+    "bodyFileName": "xml/query.xml"
   }
 }
