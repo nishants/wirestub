@@ -1,6 +1,5 @@
 require 'http' # URI is required by Net::HTTP by default
 require 'json' # URI is required by Net::HTTP by default
-require 'nokogiri' # URI is required by Net::HTTP by default
 
 module Jeyson
   class Client

@@ -28,7 +28,7 @@ public class XMLResponseBuilder {
   public byte[] render(Map scope, String relativePath) throws IOException, ScriptException, NoSuchMethodException, URISyntaxException {
     byte[] fileContents = readTemplate(new File(templatesHome, relativePath));
 
-    List<String> expressions = new ArrayList<String>();
+    List<String> expressions = new ArrayList<>();
     String xml = new String(fileContents);
 
     Matcher matcher = Pattern.compile(EXPRESSION_REGEX).matcher(xml);
@@ -41,7 +41,7 @@ public class XMLResponseBuilder {
       try {
         xml = xml.replace(expression, new Expression().eval(expr, scope).toString());
       }catch (Exception e){
-        xml = xml.replace(expression, "Error in expresssion : '" + expr +" - " + e.getMessage());
+        xml = xml.replace(expression, "Error in expression : '" + expr +" - " + e.getMessage());
       }
     }
 
