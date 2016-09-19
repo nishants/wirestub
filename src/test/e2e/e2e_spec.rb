@@ -16,18 +16,16 @@ RSpec.describe "jeyson-java" do
     end
 
     it "Should serve a plain json" do
-      expect(@client.get("/hello")).to eq('{"message":"hello"}')
-      expect(@client.get("/xml/hello")).to eq("<message>hello</message>")
+      expect(@client.get("/hello")).to  eq(@helper.read("expected/hello.json"))
+      expect(@client.get("/xml/hello")).to eq(@helper.read("expected/hello.xml"))
     end
 
     it "should support request param query" do
-      expect(@client.get("/query?time=now&message=hi")).to eq('{"data":{"queries":{"time":"now","message":"hi"}}}')
+      expect(@client.get("/query?time=now&message=hi")).to eq(@helper.read("expected/query.json"))
     end
 
     it "Should parse expressions in json templeates" do
-      expected =  {"body"=>{"message"=>"hello","request"=>["one"," two"," three"],"headers"=>["application/json"],"float"=>1.1,"sum"=>1,"nil"=>nil,"boolean"=>false,"list"=>["one","two","three","four","five"],"repeater"=>[{"id"=>"1-one"},{"id"=>"2-two"},{"id"=>"3-three"}]}}
-      actual    = JSON.parse(@client.put("/expressions", {"names" => "one, two, three"}))
-      expect(actual).to eq(expected)
+      expect(@client.put("/expressions", {"names" => "one, two, three"})).to eq(@helper.read("expected/expressions.json"))
     end
 
     it "Should set session values in before block" do
