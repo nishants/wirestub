@@ -1,1 +1,1 @@
-<data><queries><time>now</time><message>hi</message></queries></data>
+<data><queries><time>{{request.query.time}}</time><message>{{request.query.message}}</message></queries></data>
