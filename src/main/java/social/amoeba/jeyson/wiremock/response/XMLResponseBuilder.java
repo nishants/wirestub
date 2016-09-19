@@ -13,13 +13,11 @@ import java.util.regex.Pattern;
 
 public class XMLResponseBuilder {
   private final String templatesHome;
-  private final Jeyson jeyson;
 
   private static final String EXPRESSION_REGEX = "\\{\\{([^\\}]+)\\}\\}";
 
-  public XMLResponseBuilder(String templatesHome, Jeyson jeyson) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
+  public XMLResponseBuilder(String templatesHome) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
     this.templatesHome = templatesHome;
-    this.jeyson = new Jeyson(templatesHome);
   }
 
   public byte[] readTemplate(

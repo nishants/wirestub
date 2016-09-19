@@ -22,7 +22,7 @@ public class ResponseWriter {
     this.templatesHome = templatesHome;
     jeyson = new Jeyson(templatesHome);
     jsonResponseBuilder = new JSONResponseBuilder(templatesHome, jeyson);
-    xmlResponseBuilder = new XMLResponseBuilder(templatesHome, jeyson);
+    xmlResponseBuilder = new XMLResponseBuilder(templatesHome);
   }
 
   public ResponseDefinitionBuilder writeTo(ResponseDefinitionBuilder builder, Map scope, String templatePath) throws URISyntaxException, NoSuchMethodException, ScriptException, IOException {
