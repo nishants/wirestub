@@ -3,7 +3,7 @@ require './src/test/e2e/support/client'
 
 RSpec.describe "jeyson-java" do
 
-  describe "e2e : json" do
+  describe "e2e" do
 
     before(:all) do
       @helper = Jeyson::TestHelper.new
@@ -16,15 +16,12 @@ RSpec.describe "jeyson-java" do
     end
 
     it "Should serve a plain json" do
-      expected  = {"message" => "hello"}
-      actual    = JSON.parse(@client.get("/hello"))
-      expect(actual).to eq(expected)
+      expect(@client.get("/hello")).to eq('{"message":"hello"}')
+      expect(@client.get("/xml/hello")).to eq("<message>hello</message>")
     end
 
     it "should support request param query" do
-      expected =  JSON.parse('{"data":{"queries":{"time":"now", "message":"hi"}}}')
-      actual    = JSON.parse(@client.get("/query?time=now&message=hi"))
-      expect(actual).to eq(expected)
+      expect(@client.get("/query?time=now&message=hi")).to eq('{"data":{"queries":{"time":"now","message":"hi"}}}')
     end
 
     it "Should parse expressions in json templeates" do
