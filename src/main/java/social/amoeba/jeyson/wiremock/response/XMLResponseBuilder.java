@@ -40,8 +40,11 @@ public class XMLResponseBuilder {
 
     for(String expression : expressions){
       String expr = expression.replace("{{", "").replace("}}", "");
-      String evaluated = new Expression().eval(expr, scope).toString();
-      xml = xml.replace(expression, evaluated);
+      try {
+        xml = xml.replace(expression, new Expression().eval(expr, scope).toString());
+      }catch (Exception e){
+        xml = xml.replace(expression, "Error in expresssion : '" + expr +" - " + e.getMessage());
+      }
     }
 
     return xml.getBytes();
