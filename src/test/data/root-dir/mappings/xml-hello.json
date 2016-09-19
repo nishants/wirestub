@@ -1,0 +1,10 @@
+{
+  "request" : {
+    "method": "GET",
+    "url"   : "/xml/hello"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "xml/hello.xml"
+  }
+}
