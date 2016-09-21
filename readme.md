@@ -1,4 +1,4 @@
-# Miraje : a wrapper over wiremock
+# Wirestub : wiremock in stub style
 - Designed to operate in standalone and stubbing mode only.
 - Adds powerful scripting and templating system for wiremock.
 - Allows behavioral stubbing without writing java code.
@@ -10,7 +10,10 @@
     - configuration by environment.
     - setting session values in before scripts. 
     - accessing session values in templates.
-- This wrapper doesn't change any existing behavior of wiremock, so a wiremock standalone jar can be safely replaced by miraje standalone jar.
+- This wrapper doesn't change any existing behavior of wiremock, so a wiremock standalone jar can be safely replaced by miraze standalone jar.
+- Because it behaves just like wiremock, so it can be used along with other wrappers (like service_mock) and extensions.
+- It can be controlled with the wiremock's http api.
+- It support all the runtime parameters of wiremock, along with adding some of its own.
 
 # Philosophy : Stubbing over Mocking 
 - This extension tries to push developers away from mocking external services instead of stubbing them.
