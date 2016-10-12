@@ -19,7 +19,7 @@ public class Jeyson {
     try (BufferedReader buffer = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/jeyson.js")))) {
       String jsScript = buffer.lines().collect(Collectors.joining("\n"));
       Script script = new Script(jsScript);
-      Object jsObject = script.execute("jeyson", new CompileParam(Paths.get(tempatesPath)));
+      Object jsObject = script.execute("jeyson", new JeysonConfig(Paths.get(tempatesPath)));
       engine = (ScriptObjectMirror) jsObject;
     }
   }
