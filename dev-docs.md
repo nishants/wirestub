@@ -13,7 +13,10 @@ Find standalone jar at project base "jeyson-1.0-SNAPSHOT-jar-with-dependencies"
 * not tested on java versions lower than 8, might work as long as a ScriptEngine is available (java 6+)
 
 # Clean and Run Tests
-- mvn clean verify
+$ mvn clean verify
+
+#End to End Tests
+$ rake
 
 # Adding specs 
 - add specification file in test/resources/specs

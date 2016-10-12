@@ -1,6 +1,5 @@
 package social.amoeba.jeyson;
 
-import wiremock.com.fasterxml.jackson.core.JsonParseException;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -10,14 +9,10 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
-public class CompileParam {
+public class JeysonConfig {
   private final Path __files;
 
-  public CompileParam(Path __files, String template) {
-    this.__files = __files;
-  }
-
-  public CompileParam(Path __files) {
+  public JeysonConfig(Path __files) {
     this.__files = __files;
   }
 
