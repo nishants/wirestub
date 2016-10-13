@@ -3,7 +3,6 @@ package social.amoeba.jeyson;
 import javax.script.ScriptException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Expression {
