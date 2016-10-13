@@ -20,7 +20,7 @@ public class JeysonConfig {
     return new String(Files.readAllBytes(Paths.get(__files.toString(), path)));
   }
 
-  public Map parseJson(String json) throws IOException {
+  public Map parse(String json) throws IOException {
     return new ObjectMapper().readValue(json, Map.class);
   }
 
