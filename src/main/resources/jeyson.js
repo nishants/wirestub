@@ -1,39 +1,48 @@
+/****************** Begin Wrapper function *******************/
 function jeyson(jeysonConfig){
-    var
-        isExpression = function(string){
-            return string.startsWith("{{") && string.endsWith("}}");
-        },
-        numberFixture = function(number){
-            var isInt = number % 1 === 0;
-            return isInt ? new java.lang.Integer(number) : number;
-        },
-        arraysFixture = function(array){
-            var list = new java.util.ArrayList();
-            for(var i = 0 ; i < array.length; i++){
-                list.add(array[i]);
-            }
-            return list;
-        },
-        objectFixture = function(json){
-            for(var field in json){
-                var value       = json[field],
-                    isArray     = value instanceof Array,
-                    isNumber    = (typeof value == "number"),
-                    isSubtree   = (typeof value == "object") && !(value instanceof Array);
-                if(isSubtree){
-                    json[field] = objectFixture(json[field]);
-                }
-                if(isArray){
-                    json[field] = json[field].map(function(field){
-                        return objectFixture(field);
-                    });
-                    json[field] = arraysFixture(json[field]);
-                }
-                if(isNumber){
-                    json[field] = numberFixture(json[field]);
-                }
-            }
-            return json;
+
+
+  /****************** Begin Nashorn Support  *******************/
+
+  var NASHORN = {
+    packNumber : function(number){
+      var isInt = number % 1 === 0;
+      return isInt ? new java.lang.Integer(number) : number;
+    },
+    packArray : function(array){
+      var list = new java.util.ArrayList();
+      for(var i = 0 ; i < array.length; i++){
+        list.add(array[i]);
+      }
+      return list;
+    },
+    pack : function(json){
+      for(var field in json){
+        var value       = json[field],
+            isArray     = value instanceof Array,
+            isNumber    = (typeof value == "number"),
+            isSubtree   = (typeof value == "object") && !(value instanceof Array);
+        if(isSubtree){
+          json[field] = NASHORN.pack(json[field]);
+        }
+        if(isArray){
+          json[field] = json[field].map(function(field){
+            return NASHORN.pack(field);
+          });
+          json[field] = NASHORN.packArray(json[field]);
+        }
+        if(isNumber){
+          json[field] = NASHORN.packNumber(json[field]);
+        }
+      }
+      return json;
+    }
+  };
+  /****************** End Nashorn Support  *******************/
+
+  /****************** Begin Jeyson Script *******************/
+        var isExpression = function(string){
+          return string.startsWith("{{") && string.endsWith("}}");
         },
         createDirectives = function(){
             var repeater = {
@@ -317,10 +326,13 @@ function jeyson(jeysonConfig){
             }
         };
 
-    return {
+  /****************** End Jeyson Script *******************/
+
+  return {
         compile: function(scope, template){
             var result = compiler.$compile(scope, jeysonConfig.parseJson(template), jeysonConfig);
-            return objectFixture(result);
+            return NASHORN.pack(result);
         }
     };
 }
+/****************** End Wrapper function *******************/
