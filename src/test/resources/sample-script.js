@@ -42,3 +42,37 @@ var error = function error(params){
 function executeScope(params){
   return execute(params.scope,params.expression);
 }
+
+var
+    isArrayList = function (objet) {
+      return objet.getClass().getName().equals("java.util.ArrayList");
+    },
+    unwrapList = function (list) {
+      var arrayed = [];
+      list.forEach(function (value) {
+        arrayed.push(value);
+      })
+      return arrayed;
+    },
+    fixObject = function (object) {
+      for (var field in object) {
+        if (isArrayList(object[field])) {
+          object[field] = unwrapList(object[field]);
+        }
+      }
+      return object;
+    },
+    unwrap = function (param) {
+      return fixObject({val: param}).val;
+    };
+
+function insertInArray(array, val, config){
+  var jsArray = unwrap(array);
+  jsArray.push(4);
+
+  var list = new java.util.ArrayList();
+  for(var i = 0 ; i < jsArray.length; i++){
+    list.add(jsArray[i]);
+  }
+  return list;
+}

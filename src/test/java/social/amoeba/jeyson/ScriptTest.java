@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.core.Is.is;
@@ -24,6 +24,20 @@ public class ScriptTest {
     }
   }
 
+  @Test
+  public void shouldHandleArrays() throws Exception {
+    ArrayList list = new ArrayList();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    Object actual = (List)script.execute("insertInArray", list, new JeysonConfig(null));
+    List expected = new ArrayList<>();
+    expected.add(1);
+    expected.add(2);
+    expected.add(3);
+    expected.add(4);
+    assertThat(actual, is(expected));
+  }
   @Test
   public void shouldPassArgumentToScript() throws Exception {
     Object execute = script.execute("returnArgument", new Arguments("some-arg"));

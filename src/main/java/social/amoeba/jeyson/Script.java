@@ -16,7 +16,7 @@ public class Script {
     this.scriptEnginge = (Invocable) engine;
   }
 
-  public Object execute(String function, Object params) throws ScriptException, NoSuchMethodException {
+  public Object execute(String function, Object...params) throws ScriptException, NoSuchMethodException {
     return scriptEnginge.invokeFunction(function, params);
   }
 }
