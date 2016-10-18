@@ -507,6 +507,30 @@ function jeyson(jeysonConfig){
         },
       };
   /****************** Begin Nashorn Support  *******************/
+  /**** UNWRAP START **** */
+  var
+      isArrayList = function (objet) {
+        return objet.getClass().getName().equals("java.util.ArrayList");
+      },
+      unwrapList = function (list) {
+        var arrayed = [];
+        list.forEach(function (value) {
+          arrayed.push(value);
+        })
+        return arrayed;
+      },
+      fixObject = function (object) {
+        for (var field in object) {
+          if (isArrayList(object[field])) {
+            object[field] = unwrapList(object[field]);
+          }
+        }
+        return object;
+      },
+      unwrap = function (param) {
+        return fixObject({val: param}).val;
+      };
+  /**** UNWRAP END **** */
 
   var NASHORN = {
     packNumber : function(number){
@@ -540,7 +564,8 @@ function jeyson(jeysonConfig){
         }
       }
       return json;
-    }
+    },
+    unpack : unwrap
   };
   /****************** End Nashorn Support  *******************/
 
@@ -555,7 +580,7 @@ function jeyson(jeysonConfig){
 
   return {
     compile: function(scope, template){
-      return NASHORN.pack(compiler.compile(scope, JSON.parse(template), jeysonConfig));
+      return NASHORN.pack(compiler.compile(scope, NASHORN.unpack(JSON.parse(template)), jeysonConfig));
     }
   };
 }
