@@ -2,8 +2,8 @@ package social.amoeba.jeyson;
 
 import org.junit.Before;
 import org.junit.Test;
+import social.amoeba.support.ScriptSpec;
 import social.amoeba.support.TestSupport;
-import social.amoeba.support.TestSupport.Spec;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -14,16 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class JeysonTest {
 
-  private final String templatesPath  = "/templates";
-
-  private final String[]     specs    = new String[]{
-      "/specs/include_template_spec.json  :should include json with relative paths",
-      "/specs/expression_spec.json        :should support expressions for primitive types",
-      "/specs/scope_spec.json             :should support accessing scope values by reference in expressoins",
-      "/specs/plain_old.json              :every json must be a valid jeyson template",
-      "/specs/arrays_spec.json             :support for arrays",
-  };
-
+  private String templatesPath  = "/templates";
   private Jeyson jeyson;
   private TestSupport support   = new TestSupport();
 
@@ -33,14 +24,13 @@ public class JeysonTest {
   }
 
   @Test
-  public void testSpecs() throws Exception {
-    for (String spec : specs) {
-      Spec params = support.getSample(spec.split(":")[0].trim());
-      Map actual = jeyson.compile(params.scope, params.template);
+  public void templateSpecs() throws Exception {
+    for (ScriptSpec.Spec spec : ScriptSpec.getSpecs()) {
+      Map actual = jeyson.compile(spec.scope, spec.template);
       assertThat(
-          spec.split(":")[1],
+          "spec.name",
           new ObjectMapper().writeValueAsString(actual),
-          is(params.expected));
+          is(spec.expected));
     }
   }
 }
