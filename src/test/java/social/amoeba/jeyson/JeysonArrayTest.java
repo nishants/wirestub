@@ -2,7 +2,7 @@ package social.amoeba.jeyson;
 
 import org.junit.Before;
 import org.junit.Test;
-import social.amoeba.TestSupport;
+import social.amoeba.support.TestSupport;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;

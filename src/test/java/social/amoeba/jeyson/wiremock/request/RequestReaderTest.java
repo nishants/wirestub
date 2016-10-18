@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static social.amoeba.TestSupport.*;
+import static social.amoeba.support.TestSupport.*;
 import static social.amoeba.jeyson.wiremock.request.JSON.parseJSON;
 
 public class RequestReaderTest {

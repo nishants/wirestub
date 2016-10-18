@@ -1,7 +1,7 @@
 package social.amoeba.jeyson.wiremock;
 
 import org.junit.Test;
-import social.amoeba.TestSupport;
+import social.amoeba.support.TestSupport;
 
 import javax.script.ScriptException;
 import java.io.IOException;

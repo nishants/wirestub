@@ -2,8 +2,8 @@ package social.amoeba.jeyson;
 
 import org.junit.Before;
 import org.junit.Test;
-import social.amoeba.TestSupport;
-import social.amoeba.TestSupport.Spec;
+import social.amoeba.support.TestSupport;
+import social.amoeba.support.TestSupport.Spec;
 import wiremock.com.fasterxml.jackson.databind.ObjectMapper;
 
 

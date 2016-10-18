@@ -1,4 +1,4 @@
-package social.amoeba;
+package social.amoeba.support;
 
 import com.github.tomakehurst.wiremock.http.*;
 import wiremock.com.fasterxml.jackson.core.JsonProcessingException;
