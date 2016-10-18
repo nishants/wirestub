@@ -524,6 +524,9 @@ function jeyson(jeysonConfig){
           if (isArrayList(object[field])) {
             object[field] = unwrapList(object[field]);
           }
+          if(typeof object[field] == "object"){
+            object[field] = fixObject(object[field]);
+          }
         }
         return object;
       },

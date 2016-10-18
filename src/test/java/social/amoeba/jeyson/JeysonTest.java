@@ -14,7 +14,6 @@ import static org.junit.Assert.assertThat;
 
 public class JeysonTest {
 
-  private final String jeysonJsPath   = "/jeyson.js";
   private final String templatesPath  = "/templates";
 
   private final String[]     specs    = new String[]{
@@ -22,7 +21,7 @@ public class JeysonTest {
       "/specs/expression_spec.json        :should support expressions for primitive types",
       "/specs/scope_spec.json             :should support accessing scope values by reference in expressoins",
       "/specs/plain_old.json              :every json must be a valid jeyson template",
-//      "/specs/arrays_spec.json             :support for arrays",
+      "/specs/arrays_spec.json             :support for arrays",
   };
 
   private Jeyson jeyson;

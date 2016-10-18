@@ -39,6 +39,20 @@ public class ScriptTest {
     assertThat(actual, is(expected));
   }
   @Test
+  public void packList() throws Exception {
+    ArrayList list = new ArrayList();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    Object actual = script.execute("unlist", list, new JeysonConfig(null));
+    List expected = new ArrayList<>();
+    expected.add(1);
+    expected.add(2);
+    expected.add(3);
+    expected.add(4);
+    assertThat(Json.stringify(actual), is(Json.stringify(expected)));
+  }
+  @Test
   public void shouldPassArgumentToScript() throws Exception {
     Object execute = script.execute("returnArgument", new Arguments("some-arg"));
     assertThat(execute.toString(), is("some-arg"));

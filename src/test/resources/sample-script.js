@@ -66,6 +66,14 @@ var
       return fixObject({val: param}).val;
     };
 
+var packArray = function (array) {
+  var list = new java.util.ArrayList();
+  for (var i = 0; i < array.length; i++) {
+    list.add(array[i]);
+  }
+  return list;
+};
+
 function insertInArray(array, val, config){
   var jsArray = unwrap(array);
   jsArray.push(4);
@@ -75,4 +83,10 @@ function insertInArray(array, val, config){
     list.add(jsArray[i]);
   }
   return list;
+}
+
+function unlist(list, val, config){
+  list = unwrap(list);
+  list.push(4);
+  return packArray(list);
 }
