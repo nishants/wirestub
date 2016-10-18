@@ -1,0 +1,11 @@
+{
+  "scope"    : {"message": "message-from-scope !"},
+
+  "template" : {
+    "data"   : [{"@include": "shared/shared.json"}]
+  },
+
+  "expected"   : {
+    "data"   : [{"shared" : "a shared json template"}]
+  }
+}
