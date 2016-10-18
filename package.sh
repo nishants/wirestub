@@ -1,1 +1,1 @@
- mvn clean package && cp jeyson-1.0-SNAPSHOT-jar-with-dependencies.jar dist/Jeyson.jar
+ mvn clean package && cp jeyson-1.0-SNAPSHOT-jar-with-dependencies.jar dist/Jeyson.jar && rake
