@@ -23,3 +23,58 @@
 - Also the test data itself can be validated or migrated into databases if needed.
 - Miraze is designed to reflect back user response based on incoming request.
 - Though it also allows session variables, but sessions must be avoided to keep stubs stateless.
+
+
+# Jeyson Template Engine
+- request, config, session, directives, custom directives
+- link to template syntax.
+
+# Template Features
+ - conditional
+ - expressions
+ - @ignore-if : "expression"
+ - @if, @else, @then        : "expression"
+ - @include   : "expression"
+ - @log       : "expression"
+ - @repeat
+
+# Shared templates
+- segregate shared template (ease of maintaining test data)
+- include template conditionally 
+- passing params to template scope.
+
+# Sessions
+- get session
+- set session
+- use session by response body
+- reset session by api calls
+
+# @before
+- execute script before request
+- set or get session variables, request body, header, path, query in script scope.
+- exectes lines of javascript expressions in place.
+
+# @headers 
+    - use jeyson in headers
+    - conditional headers
+    
+# @body
+    - use jeyson expressions in body
+     
+# @template
+Route By Request 
+- by url path variable
+- by request query param
+- by request header
+- by request body
+- by using expressions
+- by session variable
+
+# ruby gem (fork of stub_service)
+invoke : 
+- start server : with runtime parameters
+- stub http calls + all service mock features
+- reset session
+- get session
+- set session
+
