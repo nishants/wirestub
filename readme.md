@@ -70,7 +70,11 @@ Route By Request
 - by using expressions
 - by session variable
 
-# ruby gem (fork of stub_service)
+# Run as standalone
+
+# Run as extension
+
+# stub_service (fork of service_mock) ruby gem 
 invoke : 
 - start server : with runtime parameters
 - stub http calls + all service mock features
