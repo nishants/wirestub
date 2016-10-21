@@ -32,7 +32,7 @@ public class JeysonWiremock extends ResponseDefinitionTransformer {
     ResponseDefinitionBuilder builder = new ResponseDefinitionBuilder().like(responseDefinition);
     String templatePath   = responseDefinition.getBodyFileName();
 
-    if (templatePath != null) {
+    if (templatePath != null && templatePath.contains(".template")) {
       try {
         Map scope = new ResponseScope(session, new HashMap(this.config), RequestReader.read(request));
         responseWriter = responseWriter == null ? new ResponseWriter(files.getPath()) : responseWriter;

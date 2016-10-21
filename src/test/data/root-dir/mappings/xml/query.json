@@ -5,6 +5,6 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "xml/query.xml"
+    "bodyFileName": "xml/query.template.xml"
   }
 }
